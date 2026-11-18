@@ -16,18 +16,23 @@ the difference between "ours" and "theirs" auditable.
 | Submodule | `git submodule add` under `deps/` | A standalone project your work uses: shared libraries, tooling, workflows. It stays its own project. If you own it, modify it in place and push; if not, contribute upstream rather than carrying local diffs. |
 | Plain copy | `cp` the files in | Small adopted assets you intend to own outright: a standalone script, a template, a config. No upstream tracking, no intent to merge updates. Attribution and licensing as appropriate. |
 
-- Whichever mode: write down which was chosen and why. Local edits
-  on merged or copied code must be greppable (tag + registry, see
-  `upstream-bugs.md`); submodule changes happen inside the
-  submodule's own history.
+- Whichever mode: write down which was chosen and why. Edits to
+  filtered-merge code are marked per the editing discipline below;
+  submodule changes happen inside the submodule's own history.
 
 ## Editing discipline
 
 - Touch vendored files as little as possible. Every local edit is
   a re-import cost and an upstream-diff audit item.
-- Local edits must be tagged and indexed the same way as tool
-  workarounds (see `upstream-bugs.md`): marker comment plus registry
-  entry with rationale and revert condition.
+- Edits to filtered-merge code (code you build your own work on)
+  are marked only at the copyright level: add a "Modifications by
+  <author>" note to the file header. No marker comments in the code
+  body, no registry.
+- Your own code needs no marking at all.
+- A repo may layer stricter rules on top (e.g. tagged, reversible
+  workarounds for tool bugs, indexed in a registry). Those are
+  repo-local conventions, defined in that repo's AGENTS.md; see
+  `upstream-bugs.md` for the general pattern.
 - Keep adaptation layers outside the vendored tree when possible:
   wrapper files, thin subclasses, and build glue in the consumer's
   own directories.
