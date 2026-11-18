@@ -41,7 +41,9 @@ Audience split: `AGENTS.md` and the content of this directory is
 written for agents. Everything else -- README, DEVLOG, tricks/,
 recipes/ -- is written for humans. Write them for a human reader:
 clear, terse prose, honest framing, no agent-internal shorthand.
-The content is no less relevant and binding for agents.
+The content is no less relevant and binding for agents: when a task
+falls under a workflow documented in `recipes/`, read that recipe and
+follow it. The human-readable style does not mean human-only content.
 
 - `README.md`: project-local. what is true now and why
 - `DEVLOG.md`: project-local. what happened, chronologically
