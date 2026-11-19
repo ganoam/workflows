@@ -76,3 +76,6 @@ Chronology of work on this repository.
   remaining rules were made binding for agents via a `rules.md`
   pointer bullet, and the prompt-before-fixing-legacy-content
   protocol was moved into the guide generalized to all its rules.
+- `recipes/snippet.md` added: end-of-day digest that scans today's
+  DEVLOG entries across `~/code` repos and their `deps/` checkouts
+  into `~/code/notes/snippets.md`, devlog style. Wrapper generated.
