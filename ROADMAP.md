@@ -13,7 +13,7 @@ reviewed by the owner.
 - [x] `agents/rules.md` (binding, precedence clause) and
       `agents/workflow.md` (second tier).
 - [x] `recipes/`: git-privacy, deps-management, upstream-bugs,
-      vendoring, agent-setup.
+      vendoring, agent-setup, devlog.
 - [x] `tricks/` populated; `README.md`, `DEVLOG.md`,
       `MAINTAINING.md`.
 
@@ -68,6 +68,10 @@ Apply `recipes/agent-setup.md` per repo; hw-commons is the pilot.
       when hardened.
 - [ ] Consumer README boilerplate line with the plugin install
       command.
+- [ ] Em-dash consistency: `rules.md` forbids em-dashes in generated
+      text, but this repo's own docs and the `generate-skills`
+      wrapper template still use them. Sweep docs and template, or
+      declare generated wrappers exempt.
 
 ## Notes and open decisions
 
