@@ -27,6 +27,8 @@ Standing duties in every repo:
 
 - Keep `README.md` accurate at all times — it reflects what is true
   now, so update it in the same task that changes reality.
+- Keep the repo's `ROADMAP.md` current where one exists — check off
+  items and adjust statuses in the same task that lands them.
 - Update `DEVLOG.md` when a task completes, whether the work was
   yours or the owner's — record the outcome, not just your own edits.
 - Suggest new shared `recipes/` and `tricks/` when you notice a
