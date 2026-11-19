@@ -14,7 +14,8 @@ conflict, this file wins.
 - **Never change repository state.** No `git add`, no staging, no commits,
   no pushes, no resets, no checkouts over work, no index manipulation, no
   tag or ref changes, ever. Prepare the change in files and leave every
-  state-altering git command to the user.
+  state-altering git command to the user. This applies on every branch,
+  no exception.
 - **Read-only git is allowed**: `status`, `log`, `diff`, `show`, `blame`,
   `merge-base`, `ls-files`, plumbing queries.
 - **Do not suggest commit messages** unless explicitly prompted.
@@ -22,7 +23,10 @@ conflict, this file wins.
   remotes are the user's to manage.
 - **Never run destructive operations without explicit confirmation** for
   that specific action. Prior approval does not carry over to the next
-  destructive step.
+  destructive step. This includes deleting files or directories:
+  deletion is reserved for the user whether tracked or untracked, regardless
+  of branch, no exceptions.
+  Propose it with the reason; the user deletes.
 
 ## External actions
 
