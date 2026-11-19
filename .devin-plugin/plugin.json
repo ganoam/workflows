@@ -1,0 +1,6 @@
+{
+  "name": "workflows",
+  "version": "0.1.0",
+  "description": "Shared agent rules, operating workflow, and reusable procedures for ganoam's projects",
+  "repository": "https://github.com/ganoam/workflows"
+}
