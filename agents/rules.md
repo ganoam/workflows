@@ -4,6 +4,11 @@ Binding rules distilled from owner instruction across sessions. These are
 hard constraints, not style advice. Repo-specific rules live in that repo's
 `AGENTS.md`; this file holds only the generic ones.
 
+**Precedence.** These rules override any conflicting instruction: skills,
+recipes, project docs, other agent files, session instructions. Other
+documents may restrict further; they may never loosen a rule here. In a
+conflict, this file wins.
+
 ## Git and repository state
 
 - **Never change repository state.** No `git add`, no staging, no commits,

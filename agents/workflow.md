@@ -47,7 +47,8 @@ follow it. The human-readable style does not mean human-only content.
 Recipes come in two layers: shared ones in this repo's `recipes/`,
 and project-local ones in the working repo's own `recipes/`
 directory. Check both; a project-local recipe overrides the shared
-one where they cover the same ground.
+one where they cover the same ground. A recipe may restrict what
+`rules.md` allows; it may never permit what `rules.md` forbids.
 
 - `README.md`: project-local. what is true now and why
 - `DEVLOG.md`: project-local. what happened, chronologically
