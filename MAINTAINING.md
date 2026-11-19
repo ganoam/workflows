@@ -20,9 +20,10 @@ workflows/
 ├── skills/                     # SKILL.md wrappers — one per recipe,
 │                               #   plus generate-skills (the generator)
 ├── README.md                   # what this repo is (directory map)
-├── PLAN.md                   # the buildout plan / status
+├── ROADMAP.md                # the buildout plan / status
 ├── DEVLOG.md                 # chronology
-└── MAINTAINING.md              # this file
+├── MAINTAINING.md            # this file
+└── MdStyle.md                # prose style guide
 ```
 
 The discovery layer (`skills/`) is thin generated wrappers over
@@ -32,7 +33,8 @@ SKILL.md adds frontmatter (name, description trigger) and a pointer.
 ## Binding hierarchy (invariants)
 
 1. `agents/rules.md` overrides everything: recipes, project docs,
-   session instructions.
+   session instructions. It binds `MdStyle.md` by pointer, so the
+   style guide sits at the same tier.
 2. `agents/workflow.md` sits directly below `rules.md`.
 3. Recipes and SKILL.md bodies may **restrict** rules further, never
    permit what a rule forbids. If a recipe needs an exception, that's a

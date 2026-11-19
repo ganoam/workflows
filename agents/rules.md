@@ -64,11 +64,6 @@ conflict, this file wins.
 - **Make minimal, reversible changes.** Touch as little as possible,
   especially vendored or upstream code. Workarounds get a uniform tag
   and an entry in a registry file so they can be found and reverted.
-- **No em-dashes.** Not in prose, comments, or generated text. Use
-  commas, colons, periods, or parentheses.
-- **Terse over tutorial.** For trick/command docs: one heading per
-  intent, a command block, a gotcha line only when something actually
-  went wrong. For explanations to the user: compact, no padding.
 - **Comments adjacent and truthful.** Comments sit next to the code
   they describe; names in comments match the actual identifiers.
 - **Match existing conventions.** Read the surrounding code and docs
@@ -77,6 +72,9 @@ conflict, this file wins.
 - **Prefer explicit over inferred.** When a system needs a rule set
   (e.g. "which files are private"), an explicit opt-in list beats a
   dynamically derived one the user has to argue with.
+- **All prose follows `MdStyle.md`.** The shared style guide is the
+  single source of truth for prose style, including code comments;
+  its rules are binding wherever prose is written or edited.
 
 ## Authorship and attribution
 

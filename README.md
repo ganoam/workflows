@@ -29,6 +29,8 @@ version they follow.
   command block, a gotcha line only where something actually bit.
 - `ROADMAP.md` — the buildout plan and status.
 - `MAINTAINING.md` — how to maintain and extend the plugin.
+- `MdStyle.md`: prose style guide, binding via the `rules.md`
+  pointer; rationale and detail for the doc-related style rules.
 
 ## Conventions
 

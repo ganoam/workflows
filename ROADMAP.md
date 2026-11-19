@@ -72,6 +72,10 @@ Apply `recipes/agent-setup.md` per repo; hw-commons is the pilot.
       text, but this repo's own docs and the `generate-skills`
       wrapper template still use them. Sweep docs and template, or
       declare generated wrappers exempt.
+- [ ] Sentence-per-line sweep of this repo's prose docs (`agents/`,
+      `recipes/`, `tricks/`, `README`/`DEVLOG`/`MAINTAINING`/
+      `ROADMAP`) per the new `rules.md` style rule; timing is the
+      owner's call.
 
 ## Notes and open decisions
 
@@ -80,6 +84,8 @@ Apply `recipes/agent-setup.md` per repo; hw-commons is the pilot.
   proves insufficient.
 - `workflow.md` is read-on-demand per the pointer (keeps injected
   context light); `rules.md` points at it.
+- `MdStyle.md` is bound by a `rules.md` pointer; proposed-rule
+  candidates were dropped as document-specific.
 - Generated `skills/` wrappers are committed so the plugin is
   complete out of the box; regenerate via `generate-skills`, never
   hand-edit.

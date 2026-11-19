@@ -62,3 +62,17 @@ Chronology of work on this repository.
   `workspaceconfig`'s prose-dense entries were judged too detailed.
 - Pointers added in `workflow.md`, injected `AGENTS.md`, `README`,
   `ROADMAP`; `skills/devlog/` wrapper added.
+- `rules.md` gained a style bullet: one sentence per line in
+  prose docs (replacing fixed-column wrapping), with
+  prompt-the-user-on-touch as the migration mechanism for legacy
+  content (the earlier calm-sweep-suggestion idea was dropped).
+  Trigger: consumer-repo docs are hard-wrapped and
+  painful to diff. Sweep of this repo's own docs queued in the
+  roadmap.
+- `MdStyle.md` added: human-facing style guide for prose docs
+  (sentence-per-line rationale, no-em-dashes, terse-over-tutorial,
+  generated-region exemption) in the lowRISC guide's shape. Owner
+  dropped the proposed-rule candidates as document-specific; the
+  remaining rules were made binding for agents via a `rules.md`
+  pointer bullet, and the prompt-before-fixing-legacy-content
+  protocol was moved into the guide generalized to all its rules.
