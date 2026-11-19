@@ -115,3 +115,22 @@ conflict, this file wins.
 - **Human-targeted documents are written for humans**: README, DEVLOG,
   tricks, recipes. The content is still binding and relevant to agents.
   `AGENTS.md` and `agents/*.md` are for agents.
+
+## Agent scratch space
+
+Scoped to `/tmp` only — these rules apply nowhere else.
+
+- `/tmp` is your workspace for experimentation: scratch files, minimal
+  reproducers, throwaway clones, test repos. Inside a directory you
+  create there (e.g. `/tmp/<task>-<session>`), you may run commands
+  the repo-state and destructive-operations rules would otherwise
+  forbid — creating, modifying, deleting, git experiments. Every
+  action is still proposed and explicitly approved by the user; the
+  difference is only that you execute it rather than handing the
+  command over.
+- Only touch what you created. Do not delete or modify anything else
+  under `/tmp`.
+- Nothing leaves the scratch directory: no copying into the working
+  tree, no pushes, uploads, or posts. If scratch work turns out to be
+  keepable, re-create it in the repo through the normal edit-approval
+  path; do not move it.
