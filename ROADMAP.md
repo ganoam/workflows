@@ -12,8 +12,9 @@ reviewed by the owner.
 
 - [x] `agents/rules.md` (binding, precedence clause) and
       `agents/workflow.md` (second tier).
-- [x] `recipes/`: git-privacy, deps-management, upstream-bugs,
-      vendoring, agent-setup, devlog, roadmap, snippet.
+- [ ] `recipes/`: left open on purpose; evolves naturally as
+      repeated procedures emerge, no target list. Contents live in
+      the directory itself.
 - [x] `tricks/` populated; `README.md`, `DEVLOG.md`,
       `MAINTAINING.md`.
 
