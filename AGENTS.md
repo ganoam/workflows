@@ -30,7 +30,8 @@ Standing duties in every repo:
 - Keep the repo's `ROADMAP.md` current where one exists — check off
   items and adjust statuses in the same task that lands them.
 - Update `DEVLOG.md` when a task completes, whether the work was
-  yours or the owner's — record the outcome, not just your own edits.
+  yours or the owner's — record the outcome, not just your own
+  edits (entry format: `recipes/devlog.md`).
 - Suggest new shared `recipes/` and `tricks/` when you notice a
   repeated procedure or non-obvious tool knowledge worth keeping —
   propose the entry, the owner decides.

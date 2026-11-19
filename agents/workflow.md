@@ -11,8 +11,9 @@ AGENTS.md in the same task. Never leave tribal knowledge unwritten.
 
 ## DEVLOG.md: session memory
 
-Every non-trivial work item gets a dated entry: what was done, why,
-the trigger/root cause, and where the artifacts live. The user also
+Every non-trivial work item gets an entry in the house format
+(`recipes/devlog.md`): dated sections, terse per-packet bullets
+recording what was done and why. The user also
 works solo at any time, not only between sessions: check `git log`
 periodically during the session, and whenever something looks
 unfamiliar (files you did not touch, code you do not recognize),

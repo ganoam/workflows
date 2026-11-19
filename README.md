@@ -20,8 +20,8 @@ version they follow.
 - `recipes/` — reusable detailed workflows written for humans:
   how a class of task is done end to end (importing upstream code,
   handling tool bugs, managing shared dependencies, the public/private
-  branch model, repo onboarding). Project-local `recipes/` directories
-  may layer on top and override.
+  branch model, repo onboarding, DEVLOG entry format). Project-local
+  `recipes/` directories may layer on top and override.
 - `skills/` — one generated `SKILL.md` wrapper per recipe so agents
   discover them mechanically, plus the `generate-skills` generator.
   Thin pointers; the recipe file is the source of truth.

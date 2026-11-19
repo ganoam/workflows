@@ -53,3 +53,12 @@ Chronology of work on this repository.
   edit, conversation beforehand is expected.
 - `MAINTAINING.md` documents structure, binding hierarchy, and the
   common maintenance operations.
+
+## DEVLOG entry format recipe (Nov 19)
+
+- `recipes/devlog.md` added: house format for consumer `DEVLOG.md`
+  files (dated sections, terse per-packet bullets recording intent
+  and outcome; hashes and transcripts stay in `git log`). Trigger:
+  `workspaceconfig`'s prose-dense entries were judged too detailed.
+- Pointers added in `workflow.md`, injected `AGENTS.md`, `README`,
+  `ROADMAP`; `skills/devlog/` wrapper added.
