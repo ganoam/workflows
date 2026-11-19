@@ -49,6 +49,11 @@ conflict, this file wins.
 
 ## Editing and style
 
+- **All file edits need approval.** The edit tool's inline diff is the
+  presentation: show the change there and wait for the user's approval
+  to apply it. One approval per edit: the approved text is exactly
+  what gets applied. No exceptions, including `README.md`,
+  `DEVLOG.md`, and other docs.
 - **Prefer diffs and direct, readable edits.** No scripts that transform
   prose invisibly (python rewriting markdown, sed pipelines on docs).
   The user reviews the change, not the tooling.
