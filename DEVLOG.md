@@ -91,3 +91,13 @@ Chronology of work on this repository.
   Trigger: an agent ignored the markdown style rules although they were already binding via the `rules.md` pointer; the fix makes the guide a first-class required read instead of a rule that merely names it.
 - DEVLOG entry proposals now go directly through an edit on `DEVLOG.md` (inline diff for approval) instead of chat drafts, in both `rules.md` and `workflow.md`.
 - `BACKLOG.md` added as a durable home for deferred items (this repo's public/private wiring, the `tricks/git-tricks.md` content bugs); it is meant to become a `.gitprivate` path once that setup lands.
+
+## Pointer-audit fixes (Nov 20)
+
+- `agents/template.md` preamble now names `MdStyle.md` alongside `rules.md`/`workflow.md`, so newly onboarded repos get the three-doc model.
+  Existing consumer `AGENTS.md` files still carry the old two-doc preamble; propagation is per repo.
+- `generate-skills` template and all 9 generated wrappers gained the local-override line: a `recipes/<name>.md` at the working repo's root is checked first and wins over the shared recipe.
+- `allowed-tools` dropped from the wrapper template and all generated wrappers: the read-only set had silently broken `snippet` (a recipe that writes digests and proposes DEVLOG edits); constraints already live in `rules.md`.
+  `generate-skills`' own hand-authored frontmatter keeps its tools.
+- `MAINTAINING.md` updated for the three-doc hierarchy (`MdStyle.md` now listed as a binding doc, no longer described as bound-by-pointer only).
+- `tricks/` declared non-binding for agents everywhere it was lumped in with binding docs (`rules.md`, `workflow.md`, `AGENTS.md`): tricks are human reference; the agent's only duty is suggesting new entries.

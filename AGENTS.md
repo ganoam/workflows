@@ -27,4 +27,4 @@ Standing duties in every repo:
 - Update `DEVLOG.md` when a task completes, whether the work was yours or the owner's: record the outcome, not just your own edits (entry format: `recipes/devlog.md`).
 - Suggest new shared `recipes/` and `tricks/` when you notice a repeated procedure or non-obvious tool knowledge worth keeping: propose the entry, the owner decides.
 
-Human-facing docs (`README.md`, `DEVLOG.md`, `recipes/`, `tricks/`) are written for humans; their content still binds you.
+Human-facing docs (`README.md`, `DEVLOG.md`, `recipes/`, `tricks/`) are written for humans; their content still binds you, `tricks/` excepted (reference only, your duty is suggesting new entries).

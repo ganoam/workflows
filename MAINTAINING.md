@@ -9,7 +9,7 @@ Binding rules for agents live in `agents/`; this file is about mechanics: how th
 workflows/
 ├── .devin-plugin/plugin.json   # plugin manifest (name: workflows)
 ├── AGENTS.md                   # plugin rule injected every session:
-│                               #   rules.md > workflow.md > consumer AGENTS.md
+│                               #   rules.md > workflow.md > MdStyle.md > consumer AGENTS.md
 ├── agents/
 │   ├── rules.md                # binding rules, tier 1, never loosened
 │   ├── workflow.md             # binding operating workflow, tier 2
@@ -30,8 +30,8 @@ The discovery layer (`skills/`) is thin generated wrappers over `recipes/`: the 
 ## Binding hierarchy (invariants)
 
 1. `agents/rules.md` overrides everything: recipes, project docs, session instructions.
-   It binds `MdStyle.md` by pointer, so the style guide sits at the same tier.
 2. `agents/workflow.md` sits directly below `rules.md`.
+   `MdStyle.md` sits at the same tier: `AGENTS.md` lists it as a binding document and `rules.md` delegates prose style to it.
 3. Recipes and SKILL.md bodies may **restrict** rules further, never permit what a rule forbids.
    If a recipe needs an exception, that's a bug in the recipe, or an explicit human decision, not document authority.
 4. Consumer-repo `AGENTS.md` and `recipes/` layer on top; they can restrict, never loosen `rules.md`.

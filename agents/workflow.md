@@ -24,6 +24,7 @@ Record the decision and its rationale, not just the outcome.
 ## Tool tricks
 
 Non-obvious tool/command knowledge lives in the workflows repo under `tricks/` (e.g. `tricks/git-tricks.md`).
+Tricks are human reference, not binding on agents: the agent's duty is to suggest a new entry when a non-obvious trick is used or found; the owner decides.
 Style: one `## heading` per intent, the command block below, no lengthy explanations; a gotcha line only when something genuinely bit.
 
 ## Documentation layering
@@ -31,7 +32,7 @@ Style: one `## heading` per intent, the command block below, no lengthy explanat
 Audience split: `AGENTS.md` and the content of this directory is written for agents.
 Everything else (README, DEVLOG, tricks/, recipes/) is written for humans.
 Write them for a human reader: clear, terse prose, honest framing, no agent-internal shorthand.
-The content is no less relevant and binding for agents: when a task falls under a workflow documented in `recipes/`, read that recipe and follow it.
+The content is no less relevant and binding for agents, `tricks/` excepted (human reference only): when a task falls under a workflow documented in `recipes/`, read that recipe and follow it.
 The human-readable style does not mean human-only content.
 Recipes come in two layers: shared ones in this repo's `recipes/`, and project-local ones in the working repo's own `recipes/` directory.
 Check both; a project-local recipe overrides the shared one where they cover the same ground.

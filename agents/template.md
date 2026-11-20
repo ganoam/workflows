@@ -1,6 +1,6 @@
 # AGENTS.md: notes for anyone working in this repo
 
-Generic binding rules and operating workflow live in `deps/workflows/agents/` (`rules.md`, `workflow.md`) and apply in full here.
+Generic binding rules and operating workflow live in `deps/workflows/agents/` (`rules.md`, `workflow.md`) and the prose style guide `deps/workflows/MdStyle.md`; all apply in full here.
 This file holds only repo-specific guidance.
 Keep it current per the shared rules.
 

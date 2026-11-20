@@ -32,10 +32,6 @@ Wrapper content: same frontmatter for both, different body:
 name: <name>
 description: <first sentence of the recipe's intro paragraph>
 generated: true
-allowed-tools:
-  - read
-  - grep
-  - glob
 ---
 ```
 
@@ -45,6 +41,7 @@ Body for a shared recipe:
 
 ```markdown
 Read `deps/workflows/recipes/<name>.md`, the repo's pinned checkout, and follow it end to end; if that submodule is absent, read `recipes/<name>.md` at the plugin root instead.
+A `recipes/<name>.md` at the working repo's root overrides it: if present, read and follow that file instead.
 Its prose targets human readers; its content binds you.
 The binding rules in `agents/rules.md` apply unconditionally and override anything in that document.
 ```

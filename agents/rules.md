@@ -100,7 +100,7 @@ In a conflict, this file wins.
 - **Keep `README` accurate.**
   Structure, build, and workflow sections must reflect the current state of the repo.
 - **Human-targeted documents are written for humans**: README, DEVLOG, tricks, recipes.
-  The content is still binding and relevant to agents.
+  The content is still binding and relevant to agents, `tricks/` excepted: tricks are human reference, and the only agent duty there is suggesting new entries.
   `AGENTS.md` and `agents/*.md` are for agents.
 
 ## Agent scratch space
