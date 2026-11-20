@@ -60,3 +60,8 @@ Chronology of work on this repository.
 - `agents/rules.md` gained a bullet under "Editing and style": an existing file is changed through an edit with an inline diff, never through a full-file write presented for approval, so the reviewer sees what changed rather than only the new content.
   An intentional complete rewrite requires saying so explicitly and getting approval for the overwrite itself.
   Trigger: agents repeatedly presented whole-file writes whose diffs hid what the overwrite destroyed.
+
+## agent-setup: stand-alone repo variant (Nov 20)
+
+- `recipes/agent-setup.md` extended with a third repo type: the stand-alone non-project repo, which builds nothing and has no dependencies, hence no `deps/workflows` pin.
+  Its `AGENTS.md` preamble points at the machine checkout `~/workspaceconfig/deps/workflows`; if that checkout is absent at setup time, the agent does nothing and alerts the user rather than producing a partial setup.

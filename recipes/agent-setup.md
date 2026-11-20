@@ -2,13 +2,14 @@
 
 Set up the shared agent workflow in a repo: submodule, AGENTS.md, hooks, local skills, plus the one-time machine plugin install.
 The single source for this setup; other repos' docs point here.
-A dependency repo that never gets its own submodule is onboarded through the parent's sibling checkout instead; see "Dependency repo" below.
+Two repo types carry no pin of their own: a dependency repo is onboarded through the parent's sibling checkout (see "Dependency repo"), a stand-alone non-project repo through the machine checkout `~/workspaceconfig/deps/workflows` (see "Stand-alone repo").
 
 ## Architecture
 
 - This repo is a Devin plugin (`skills/` + `.devin-plugin/`) and a docs submodule at the same time.
   They play different roles: the plugin provides discovery (skill list, injected AGENTS.md); the repo's `deps/workflows` checkout is the canonical content: each repo pins the workflow version it follows, and plugin files are only the fallback when the submodule is absent.
 - A dependency repo without its own pin follows the parent's `deps/workflows` through the sibling path `../workflows`.
+- A stand-alone repo without any pin follows the machine checkout `~/workspaceconfig/deps/workflows`.
 - `agents/rules.md` is injected as always-on context and overrides anything else: skills, recipes, project docs, session instructions.
 - `agents/workflow.md` is the second tier: operating guidelines that bind unless `rules.md` or the user says otherwise.
 - `recipes/*.md` here are human-canonical.
@@ -77,6 +78,21 @@ It still follows the shared workflow through the sibling checkout: the parent's 
 
 **Agent procedure variant.**
 Onboarding a dep repo follows the consumer procedure above with these deltas: in the survey, verify `../workflows` exists (else `~/workspaceconfig/deps/workflows`) and read the binding docs from there; skip the submodule step entirely; in the AGENTS.md step, write the sibling-path preamble plus the fallback chain; privacy, local skills, and reporting are unchanged, with hooks and commit commands scoped to the dep repo.
+
+## Stand-alone repo: no build, no dependencies
+
+A stand-alone repo that builds nothing and has no dependencies (notes, dotfiles, misc collections) carries no `deps/workflows` submodule: there is no project to pin a version against.
+It still follows the shared workflow through the machine checkout `~/workspaceconfig/deps/workflows`.
+
+- `AGENTS.md`: copy `agents/template.md`, but point the preamble at `~/workspaceconfig/deps/workflows/` instead of `deps/workflows/`.
+  Fallback: if that checkout is absent, the injected plugin copies of `rules.md` and `workflow.md` apply.
+- Submodule step: skipped.
+- Privacy, local skills, owner hand-offs: as for a dependency repo (no submodule commands; commits inside the repo itself).
+
+**Agent procedure variant.**
+Onboarding a stand-alone repo follows the consumer procedure with these deltas: in the survey, verify `~/workspaceconfig/deps/workflows` exists and read the binding docs from there.
+If it is absent, do nothing and alert the user: no `AGENTS.md`, no partial setup.
+Skip the submodule step; in the AGENTS.md step, write the machine-checkout preamble; privacy, local skills, and reporting are unchanged.
 
 ## Ongoing
 
