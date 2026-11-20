@@ -100,6 +100,9 @@ In a conflict, this file wins.
 - **Keep `DEVLOG.md` current.**
   Sessions get entries; periodically check `git log` for work done outside the session and prompt the user with a proposed entry when something is unfamiliar.
   After each non-trivial work packet, prompt the proposed entry directly as an edit on `DEVLOG.md` (inline diff for approval), not as chat text.
+- **Keep `BACKLOG.md` current where one exists.**
+  Deferred work items, written by the user or at the user's request only.
+  Your duty is maintenance, not authorship: when an item lands, propose its removal in the same task.
 - **Keep `README` accurate.**
   Structure, build, and workflow sections must reflect the current state of the repo.
 - **Human-targeted documents are written for humans**: README, DEVLOG, tricks, recipes.

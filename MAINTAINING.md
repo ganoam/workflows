@@ -8,6 +8,8 @@ Binding rules for agents live in `agents/`; this file is about mechanics: how th
 ```
 workflows/
 ├── .devin-plugin/plugin.json   # plugin manifest (name: workflows)
+├── hooks.json                  # plugin lifecycle hooks (e.g. BACKLOG
+│                               #   reminder on DEVLOG edits)
 ├── AGENTS.md                   # plugin rule injected every session:
 │                               #   rules.md > workflow.md > MdStyle.md > consumer AGENTS.md
 ├── agents/
@@ -21,6 +23,7 @@ workflows/
 ├── README.md                   # what this repo is (directory map)
 ├── ROADMAP.md                # the buildout plan / status
 ├── DEVLOG.md                 # chronology
+├── BACKLOG.md                # deferred work items
 ├── MAINTAINING.md            # this file
 └── MdStyle.md                # prose style guide
 ```

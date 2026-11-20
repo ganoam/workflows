@@ -103,3 +103,7 @@ Chronology of work on this repository.
 - `tricks/` declared non-binding for agents everywhere it was lumped in with binding docs (`rules.md`, `workflow.md`, `AGENTS.md`): tricks are human reference; the agent's only duty is suggesting new entries.
 - `AGENTS.md` preamble made a verbatim canonical block in `agents/template.md` (only the pointer path varies by repo type), and `rules.md` gained a sync duty: whenever the workflows checkout a repo follows changes, a differing preamble is drift and gets a sync proposal.
   `recipes/agent-setup.md` records the mechanism under Ongoing.
+- `BACKLOG.md` made a canonical workflow document: deferred items, owner- or owner-request-authored, agent-maintained (removal proposed in the same task that lands an item).
+  Duty added in `rules.md`, `workflow.md` layering and session lifecycle, injected `AGENTS.md`, `MAINTAINING.md`, and the file's own header.
+- `hooks.json` added at the plugin root: a `PostToolUse` hook on `edit`/`write` injects a reminder to check `BACKLOG.md` whenever a `DEVLOG.md` is edited, so the maintenance duty fires mechanically instead of relying on recall.
+  Plugin hooks are fail-open; the `rules.md` duty stays the backstop.

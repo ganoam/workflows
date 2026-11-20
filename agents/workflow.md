@@ -42,6 +42,8 @@ A recipe may restrict what `rules.md` allows; it may never permit what `rules.md
   What is true now and why.
 - `DEVLOG.md`: project-local.
   What happened, chronologically.
+- `BACKLOG.md`: project-local.
+  Deferred work items; entries are written by the owner or at the owner's request, and the agent maintains the file by proposing removal of items as they land.
 - `AGENTS.md`: project-local.
   Conventions and instructions for agents.
 - `recipes/` in this repo (shared across projects): reusable detailed workflows (see `git-privacy.md`)
@@ -103,7 +105,7 @@ Deliverables that need external action (reports, application materials, upstream
 
 At session start or when resuming: read AGENTS.md and DEVLOG.md, check `git log` and `git status` for solo work since the last entry.
 During work: update docs as conventions emerge, not at the end.
-At session end: DEVLOG entry written, AGENTS.md current if conventions changed, README accurate, no leftover scratch state.
+At session end: DEVLOG entry written, AGENTS.md current if conventions changed, BACKLOG.md pruned of landed items, README accurate, no leftover scratch state.
 
 ## Multi-file or multi-repo deliverables
 
