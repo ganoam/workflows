@@ -15,6 +15,8 @@ This file only defines what an entry looks like.
 - Terse bullets, one per work packet: what was done and the intent behind it, plus the outcome where it isn't obvious from the statement.
 - Keep identifiers only where they carry meaning for a reader reconstructing events (a path, a branch name, a config key).
   Commit hashes, file lists, and command transcripts belong to `git log`, not here.
+- `BACKLOG.md` is invisible to the chronology: an entry describes the work and its outcome, never that the item was queued in the backlog.
+  The same applies to every derived log (snippets, era digest).
 
 ## Attribution
 
