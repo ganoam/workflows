@@ -79,3 +79,8 @@ Chronology of work on this repository.
   `recipes/devlog.md` defines the mark next to `owner:`.
   Gap fills merge into an existing dated section where one covers the work's date; a new heading is created only when none does, following the devlog's own convention, and the mark lives on the bullets, not the heading.
 - The digest gained a second output: `era-digest.md`, a coarse record of substantial work streams starting or completing across projects, maintained by the same end-of-day scan; daily detail stays in `snippets.md`.
+
+## nvim-sv recipe + skill (Nov 20)
+
+- `recipes/nvim-sv.md` added from the owner's `~/code/notes/project-setup.md`: LazyVerilog LSP setup (`lazyverilog.toml`, `vcode.f` via `gen_flist.py`, LSP debugging) plus the `nvim-lint` `fusesoc_verilator` path (`.nvim.lua` target, core `lint` target, SARIF/regex diagnostics).
+  Generated wrapper `skills/nvim-sv/SKILL.md` emitted per the `generate-skills` template.
