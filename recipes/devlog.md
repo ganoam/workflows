@@ -20,6 +20,7 @@ This file only defines what an entry looks like.
 
 A section may mix agent and owner work.
 Mark owner solo work so it is not absorbed into session output: an `owner:` prefix on the bullet, or a short separate paragraph when several bullets are his.
+Entries inferred by the end-of-day digest (`recipes/snippet.md`) rather than recorded by their author carry a `snippet:` prefix.
 
 ## Example
 

@@ -37,6 +37,10 @@ Chronology of work on this repository.
   Owner dropped the proposed-rule candidates as document-specific; the remaining rules were made binding for agents via a `rules.md` pointer bullet, and the prompt-before-fixing-legacy-content protocol was moved into the guide generalized to all its rules.
 - `recipes/snippet.md` added: end-of-day digest that scans today's DEVLOG entries across `~/code` repos and their `deps/` checkouts into `~/code/notes/snippets.md`, devlog style.
   Wrapper generated.
+- snippet: `rules.md` gained the `/tmp` scratch-space section.
+- snippet: `rules.md` repository-state and destructive-action rules clarified.
+- snippet: `recipes/roadmap.md` added.
+- snippet: ROADMAP's evolving recipe list removed.
 
 ## Prose style sweep (Nov 19)
 
@@ -65,3 +69,13 @@ Chronology of work on this repository.
 
 - `recipes/agent-setup.md` extended with a third repo type: the stand-alone non-project repo, which builds nothing and has no dependencies, hence no `deps/workflows` pin.
   Its `AGENTS.md` preamble points at the machine checkout `~/workspaceconfig/deps/workflows`; if that checkout is absent at setup time, the agent does nothing and alerts the user rather than producing a partial setup.
+
+## snippet: DEVLOG gap summarizes git log (Nov 20)
+
+- `recipes/snippet.md` style rule changed: the day's `git log` is now always checked against DEVLOG coverage, so an incomplete entry is caught the same way as a missing one.
+  Uncovered commits get a `DEVLOG gap` marker plus bullets summarizing what the log shows; intent is not invented.
+- Same file gained a date rule: bullets carry the work's real date (DEVLOG section date for sourced bullets, commit author date for gap fills), and material from another day is prefixed with its date instead of landing in today's section.
+- The recipe now closes the loop: each `DEVLOG gap` found during the scan produces a draft DEVLOG entry for the source repo, proposed for approval and prefixed `snippet:` so digest-inferred entries stay distinguishable from author-recorded ones.
+  `recipes/devlog.md` defines the mark next to `owner:`.
+  Gap fills merge into an existing dated section where one covers the work's date; a new heading is created only when none does, following the devlog's own convention, and the mark lives on the bullets, not the heading.
+- The digest gained a second output: `era-digest.md`, a coarse record of substantial work streams starting or completing across projects, maintained by the same end-of-day scan; daily detail stays in `snippets.md`.
