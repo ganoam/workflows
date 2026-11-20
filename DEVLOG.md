@@ -44,3 +44,8 @@ Chronology of work on this repository.
 - `skills/generate-skills/SKILL.md` wrapper template fixed; the 8 generated `skills/*/SKILL.md` wrappers regenerated from it (agent-setup's description also picked up the recipe's real first sentence).
 - ROADMAP Phase 4: em-dash consistency and sentence-per-line sweep items checked off.
 - Content bugs spotted in `tricks/git-tricks.md` left in place pending owner decision: `## Spase git checkout` typo, unclosed paren under "Adding submodules", a shell comment missing `#` in the submodule-removal block, a 4-backtick fence after the `pip install` block, odd spacing in the filter-repo step-3 line.
+
+## agent-setup: dependency-repo onboarding (Nov 20)
+
+- `recipes/agent-setup.md` extended with a "Dependency repo" variant: a repo that only ever lives as a `deps/` checkout (e.g. `deps/scripts`) skips the submodule step and points its `AGENTS.md` preamble at the sibling `../workflows`, falling back to `~/workspaceconfig/deps/workflows` then the injected plugin copies.
+  Trigger: `scripts` is a helper repo never checked out in isolation, so it carries no own workflows pin but should still follow the workflow.

@@ -2,11 +2,13 @@
 
 Set up the shared agent workflow in a repo: submodule, AGENTS.md, hooks, local skills, plus the one-time machine plugin install.
 The single source for this setup; other repos' docs point here.
+A dependency repo that never gets its own submodule is onboarded through the parent's sibling checkout instead; see "Dependency repo" below.
 
 ## Architecture
 
 - This repo is a Devin plugin (`skills/` + `.devin-plugin/`) and a docs submodule at the same time.
   They play different roles: the plugin provides discovery (skill list, injected AGENTS.md); the repo's `deps/workflows` checkout is the canonical content: each repo pins the workflow version it follows, and plugin files are only the fallback when the submodule is absent.
+- A dependency repo without its own pin follows the parent's `deps/workflows` through the sibling path `../workflows`.
 - `agents/rules.md` is injected as always-on context and overrides anything else: skills, recipes, project docs, session instructions.
 - `agents/workflow.md` is the second tier: operating guidelines that bind unless `rules.md` or the user says otherwise.
 - `recipes/*.md` here are human-canonical.
@@ -59,6 +61,22 @@ And **preserve existing local content**: an `AGENTS.md` that already exists hold
 6. **Report.**
    Summarize: what exists now, the exact commands the owner must run (submodule, hooks, commits), and propose a DEVLOG entry per `workflow.md`.
    Do not commit anything.
+
+## Dependency repo: no own submodule
+
+A repo that is only ever worked on as a dependency of another repo (e.g. `deps/scripts` inside a consumer checkout) does not get a `deps/workflows` submodule of its own.
+It still follows the shared workflow through the sibling checkout: the parent's `deps/workflows`, seen from the dep's root as `../workflows`.
+
+- `AGENTS.md`: copy `agents/template.md`, but point the preamble at `../workflows/` instead of `deps/workflows/`.
+  State the fallback chain explicitly: if `../workflows` is absent (standalone checkout), use `~/workspaceconfig/deps/workflows`; if that is absent too, the injected plugin copies of `rules.md` and `workflow.md` apply.
+- Submodule step: skipped by definition.
+- Privacy: unchanged.
+  If the dep uses the public/private split, wire `.gitprivate` and hooks in the dep's own repo; the hooks source resolves by sibling convention too (`git-util/` inside the dep itself for `scripts`, `../scripts/git-util/` for other deps).
+- Local skills: if the dep has `recipes/`, generate `.devin/skills/` wrappers there as usual.
+- Owner hand-offs: no submodule commands; the remaining ones are commits inside the dep repo itself.
+
+**Agent procedure variant.**
+Onboarding a dep repo follows the consumer procedure above with these deltas: in the survey, verify `../workflows` exists (else `~/workspaceconfig/deps/workflows`) and read the binding docs from there; skip the submodule step entirely; in the AGENTS.md step, write the sibling-path preamble plus the fallback chain; privacy, local skills, and reporting are unchanged, with hooks and commit commands scoped to the dep repo.
 
 ## Ongoing
 
