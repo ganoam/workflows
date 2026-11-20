@@ -4,6 +4,9 @@ Generic binding rules and operating workflow live in `deps/workflows/agents/` (`
 This file holds only repo-specific guidance.
 Keep it current per the shared rules.
 
+<Canonical preamble: everything from the `# AGENTS.md` title through this note's preceding line is copied verbatim into every consumer `AGENTS.md`.
+Keep it byte-identical so drift is a string compare; only the pointer path varies by repo type (`../workflows/` for dependency repos, `~/workspaceconfig/deps/workflows/` for stand-alone ones, see `recipes/agent-setup.md`).>
+
 ## What this is
 
 <One paragraph: what the project is, who it is for, why it exists.>

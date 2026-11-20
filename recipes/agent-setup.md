@@ -98,4 +98,5 @@ Skip the submodule step; in the AGENTS.md step, write the machine-checkout pream
 
 - Shared recipes change: edit the recipe, re-run generation in the workflows repo so its `skills/` stay in sync, commit there.
 - New repo-local convention: goes in that repo's `AGENTS.md`, not here.
+- `AGENTS.md` preamble drift: the canonical block lives in `agents/template.md` (verbatim, pointer path per repo type); consumer copies are synced per the `rules.md` duty whenever the checkout changes.
 - Rules conflict: `rules.md` wins, always; recipes may restrict, never permit.

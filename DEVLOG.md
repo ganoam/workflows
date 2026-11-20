@@ -101,3 +101,5 @@ Chronology of work on this repository.
   `generate-skills`' own hand-authored frontmatter keeps its tools.
 - `MAINTAINING.md` updated for the three-doc hierarchy (`MdStyle.md` now listed as a binding doc, no longer described as bound-by-pointer only).
 - `tricks/` declared non-binding for agents everywhere it was lumped in with binding docs (`rules.md`, `workflow.md`, `AGENTS.md`): tricks are human reference; the agent's only duty is suggesting new entries.
+- `AGENTS.md` preamble made a verbatim canonical block in `agents/template.md` (only the pointer path varies by repo type), and `rules.md` gained a sync duty: whenever the workflows checkout a repo follows changes, a differing preamble is drift and gets a sync proposal.
+  `recipes/agent-setup.md` records the mechanism under Ongoing.

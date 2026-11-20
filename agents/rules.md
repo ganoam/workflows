@@ -94,6 +94,9 @@ In a conflict, this file wins.
 
 - **Keep `AGENTS.md` alive.**
   When a session establishes a new convention, trap, or rule, update `AGENTS.md` as part of the same task, not later.
+- **Keep the `AGENTS.md` preamble in sync.**
+  It is a verbatim block defined in the `template.md` next to this file.
+  Whenever the workflows checkout the repo follows changes, by edit, pin bump, or otherwise, a repo copy differing beyond the pointer path for its repo type is drift: propose the sync like any other edit.
 - **Keep `DEVLOG.md` current.**
   Sessions get entries; periodically check `git log` for work done outside the session and prompt the user with a proposed entry when something is unfamiliar.
   After each non-trivial work packet, prompt the proposed entry directly as an edit on `DEVLOG.md` (inline diff for approval), not as chat text.
