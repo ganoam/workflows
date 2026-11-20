@@ -2,8 +2,8 @@
 
 ## `--no-same-owner`
 
-As root, `tar -x` preserves archive uid/gid → `Cannot change ownership`
-errors (or silently wrong ownership when it *can* chown). Always:
+As root, `tar -x` preserves archive uid/gid → `Cannot change ownership` errors (or silently wrong ownership when it *can* chown).
+Always:
 
 ```shell
 tar --no-same-owner -xf archive.tar.gz -C dest/
@@ -14,8 +14,8 @@ Default behavior for non-root anyway; only matters for root/containers.
 ## Flatten a single top-level directory
 
 Release tarballs usually nest (`nvim-linux-x86_64/`, `ripgrep-13.0.0-…/`).
-`--strip-components=1` breaks archives whose payload is a bare file
-(e.g. `tmux`). Flatten conditionally instead:
+`--strip-components=1` breaks archives whose payload is a bare file (e.g. `tmux`).
+Flatten conditionally instead:
 
 ```bash
 tar --no-same-owner -xf "$archive" -C "$dest" || return 1

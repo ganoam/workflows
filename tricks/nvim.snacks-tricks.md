@@ -2,13 +2,11 @@
 
 ## Picker opens files in the wrong window (terminal buffers)
 
-`Snacks.picker` resolves a "main" window for the jump target via
-`picker.opts.main` → `snacks/picker/core/main.lua`. Default:
-`{ float=false, file=true, current=false }`.
+`Snacks.picker` resolves a "main" window for the jump target via `picker.opts.main` → `snacks/picker/core/main.lua`.
+Default: `{ float=false, file=true, current=false }`.
 
-`file=true` filters out windows whose buffer has `buftype ~= ""` — so
-invoking the picker from a `:terminal` split silently jumps to the
-most-recently-used *file* window. Fix:
+`file=true` filters out windows whose buffer has `buftype ~= ""`, so invoking the picker from a `:terminal` split silently jumps to the most-recently-used *file* window.
+Fix:
 
 ```lua
 picker = {
@@ -17,8 +15,8 @@ picker = {
 },
 ```
 
-(`main = { current = true }` takes the window unconditionally — even
-floats. `file=false` keeps floats excluded.)
+(`main = { current = true }` takes the window unconditionally, even floats.
+`file=false` keeps floats excluded.)
 
 ## Filter a picker to terminal buffers only
 
@@ -32,13 +30,11 @@ Snacks.picker.buffers({
 })
 ```
 
-`filter.filter(item, filter):boolean` — applied via
-`ctx.filter:filter(items)` inside finders (`core/filter.lua`).
+`filter.filter(item, filter):boolean`: applied via `ctx.filter:filter(items)` inside finders (`core/filter.lua`).
 
 ## Reloading / live-patching
 
-Picker opts are read fresh at picker creation — patch the live config
-without a full reload:
+Picker opts are read fresh at picker creation, patch the live config without a full reload:
 
 ```vim
 :lua Snacks.config.picker.main = { file = false }

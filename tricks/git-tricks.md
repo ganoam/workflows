@@ -115,16 +115,18 @@ git submodule update --recursive --remote
 
 ### Common keys per `submodule.<name>` section
 
-- `url` — remote URL
-- `path` — checkout location relative to repo root
-- `branch` — tracked branch, used by `git submodule update --remote`
-- `update` — update mode (`checkout`, `rebase`, `merge`, `none`)
-- `ignore` — what `git status`/`git diff` ignore for that submodule (`all`, `dirty`, `untracked`, `none`)
-- `shallow` — whether to do shallow clones
+- `url`: remote URL
+- `path`: checkout location relative to repo root
+- `branch`: tracked branch, used by `git submodule update --remote`
+- `update`: update mode (`checkout`, `rebase`, `merge`, `none`)
+- `ignore`: what `git status`/`git diff` ignore for that submodule (`all`, `dirty`, `untracked`, `none`)
+- `shallow`: whether to do shallow clones
 
 ### Important caveat
 
-Editing `.gitmodules` only changes the **declared intent** - it does not by itself update the actual checked-out submodule or the local `.git/config` copy. After any edit, you generally need:
+Editing `.gitmodules` only changes the **declared intent**.
+It does not by itself update the actual checked-out submodule or the local `.git/config` copy.
+After any edit, you generally need:
 
 ```shell
 git submodule sync   # propagate .gitmodules changes into .git/config
@@ -152,7 +154,8 @@ cd opentitan-temp
 
 Step 3: Extract the directories you want
 
-Based on what I see, you likely want  util/uvmdvgen  and possibly  hw/dv . Here's how to extract them:
+Based on what I see, you likely want  util/uvmdvgen  and possibly  hw/dv .
+Here's how to extract them:
 
 > IMPORTANT: filter-repo is destructive.
 > everything except the specified paths will be lost.
@@ -207,23 +210,21 @@ git branch backup-before-reorder          # safety net
 git rebase -i ${FIRST}^
 ```
 
-Pitfall: if the first own commit is the *root* commit (e.g. upstream
-history was merged in later via `--allow-unrelated-histories`), `${FIRST}^`
-does not exist -> `fatal: invalid upstream`. Rebase the whole history
-instead:
+Pitfall: if the first own commit is the *root* commit (e.g. upstream history was merged in later via `--allow-unrelated-histories`), `${FIRST}^` does not exist -> `fatal: invalid upstream`.
+Rebase the whole history instead:
 
 ```shell
 git rebase -i --root
 ```
 
-Note: `--root` linearizes history -- merge commits (incl. the
-unrelated-histories merge) are flattened. Use `--rebase-merges` to keep them.
+Note: `--root` linearizes history.
+Merge commits (incl. the unrelated-histories merge) are flattened.
+Use `--rebase-merges` to keep them.
 
 ### Auto-move own commits to the bottom of the todo list
 
 `GIT_SEQUENCE_EDITOR` runs on the todo file before/instead of an editor.
-This script moves all `pick` lines authored by you to the end (commits
-apply top-to-bottom -> yours end up newest):
+This script moves all `pick` lines authored by you to the end (commits apply top-to-bottom -> yours end up newest):
 
 ```shell
 cat > /tmp/mine-last.sh <<'EOF'
@@ -243,8 +244,7 @@ chmod +x /tmp/mine-last.sh
 GIT_SEQUENCE_EDITOR=/tmp/mine-last.sh git rebase -i --root
 ```
 
-Variant -- annotate instead of auto-move (appends `# <author>` to each
-`pick` line, then opens your normal editor; trailing `#` text is ignored):
+Variant: annotate instead of auto-move (appends `# <author>` to each `pick` line, then opens your normal editor; trailing `#` text is ignored):
 
 ```shell
 cat > /tmp/annotate-todo.sh <<'EOF'
@@ -266,9 +266,8 @@ GIT_SEQUENCE_EDITOR=/tmp/annotate-todo.sh git rebase -i --root
 
 ### "Waiting for your editor to close the file..." hangs
 
-The script exits instantly; that hint line stays on screen while git
-silently *replays* commits -- a full-history `--root` rebase takes a long
-time. Check progress from another terminal:
+The script exits instantly; that hint line stays on screen while git silently *replays* commits, a full-history `--root` rebase takes a long time.
+Check progress from another terminal:
 
 ```shell
 ps aux | grep -E "git (rebase|cherry-pick|am)" | grep -v grep
@@ -276,18 +275,15 @@ wc -l .git/rebase-merge/done .git/rebase-merge/git-rebase-todo
 tail -3 .git/rebase-merge/done      # last entry = where it currently is
 ```
 
-If `.git/rebase-merge/done` keeps growing: just wait. If it stopped, the
-last line is where it stalled (probably a conflict). If `ps` shows a real
-editor (`vi`, `nano`, ...) the script errored and git fell back to the
-default editor -- `Ctrl-C`, `git rebase --abort`, debug the script
-standalone first.
+If `.git/rebase-merge/done` keeps growing: just wait.
+If it stopped, the last line is where it stalled (probably a conflict).
+If `ps` shows a real editor (`vi`, `nano`, ...) the script errored and git fell back to the default editor: `Ctrl-C`, `git rebase --abort`, debug the script standalone first.
 
 Other caveats:
 - Conflicts likely where upstream commits touched same files.
   `git rebase --continue` / `--abort` (restores backup state).
 - Every SHA after the rebase start point is rewritten -> force-push if published.
-- Own commits depending on later upstream content may not reorder
-  cleanly; then rebase upstream first and cherry-pick own commits on top.
+- Own commits depending on later upstream content may not reorder cleanly; then rebase upstream first and cherry-pick own commits on top.
 
 Verify afterwards:
 
@@ -295,9 +291,8 @@ Verify afterwards:
 git log --format='%an %s' | uniq -c   # own commits = contiguous block on top
 ```
 
-Note: reordering is cosmetic -- future merges from the upstream remote
-re-interleave history. `git log --author=<me>` / `git shortlog` already
-give a "my work" view without rewriting anything.
+Note: reordering is cosmetic: future merges from the upstream remote re-interleave history.
+`git log --author=<me>` / `git shortlog` already give a "my work" view without rewriting anything.
 
 ## Rename a branch
 
@@ -317,9 +312,7 @@ git push -u private private:master
 git push private --delete local
 ```
 
-Fails if it is the remote's default branch ("refusing to delete the
-current branch") -- change the default on GitHub (Settings -> Branches)
-or leave the branch.
+Fails if it is the remote's default branch ("refusing to delete the current branch"): change the default on GitHub (Settings -> Branches) or leave the branch.
 
 ## Point a repo's hooks at a directory (shared, auto-updating hooks)
 
@@ -327,13 +320,13 @@ or leave the branch.
 git config core.hooksPath <dir>
 ```
 
-Relative paths resolve against the worktree top-level. Missing dir ->
-silently NO hooks run (check the dir exists when setting).
+Relative paths resolve against the worktree top-level.
+Missing dir -> silently NO hooks run (check the dir exists when setting).
 
 ## Vendor only a subdirectory of another repo (git subtree)
 
-`git subtree add --prefix=X <repo> <ref>` vendors the WHOLE repo, not
-the subdir. Split the subdir out upstream first:
+`git subtree add --prefix=X <repo> <ref>` vendors the WHOLE repo, not the subdir.
+Split the subdir out upstream first:
 
 ```shell
 cd <source-repo>
@@ -344,7 +337,8 @@ git subtree add --prefix=<subdir> <source-repo> split-<name> --squash
 
 ## Update a vendored subtree
 
-Split is a snapshot: it does not track upstream. Re-split, then pull:
+Split is a snapshot: it does not track upstream.
+Re-split, then pull:
 
 ```shell
 cd <source-repo>
@@ -353,8 +347,7 @@ cd <target-repo>
 git subtree pull --prefix=<subdir> <source-repo> split-<name> --squash
 ```
 
-Local edits can go back upstream: `git subtree push --prefix=<subdir>
-<repo> <branch>`.
+Local edits can go back upstream: `git subtree push --prefix=<subdir> <repo> <branch>`.
 
 ## Bump a submodule to its tracked branch tip
 
@@ -367,13 +360,10 @@ Requires `submodule.<path>.branch` set in `.gitmodules`.
 
 ## Caution: subtree vs. submodule when you need upstream tracking
 
-Subtree copies are static snapshots. They never track upstream; every
-update means re-split + `subtree pull`, and each pull adds squash/merge
-noise to your history. For content that must stay current, prefer a
-submodule instead: the parent repo tracks only the gitlink, so even a
-full checkout confines the noise to the subdir. Sparse checkout inside
-a submodule is cosmetic only and not committed (per-clone state in
-`.git/modules/<name>/info/sparse-checkout`).
+Subtree copies are static snapshots.
+They never track upstream; every update means re-split + `subtree pull`, and each pull adds squash/merge noise to your history.
+For content that must stay current, prefer a submodule instead: the parent repo tracks only the gitlink, so even a full checkout confines the noise to the subdir.
+Sparse checkout inside a submodule is cosmetic only and not committed (per-clone state in `.git/modules/<name>/info/sparse-checkout`).
 
 ## Worktrees: second checkout of the same repo
 
@@ -385,14 +375,13 @@ git worktree prune                   # drop registry entries whose dir is gone
 ```
 
 One branch, one worktree: a branch cannot be checked out twice.
-`rm -rf` on a worktree dir leaves a stale registry entry in
-`.git/worktrees/` -> "already used by worktree at <gone path>" on the
-next `worktree add`. Fix: `git worktree prune` (registry, not the
-filesystem, is what the branch-pin check consults).
+`rm -rf` on a worktree dir leaves a stale registry entry in `.git/worktrees/` -> "already used by worktree at <gone path>" on the next `worktree add`.
+Fix: `git worktree prune` (registry, not the filesystem, is what the branch-pin check consults).
 
 ## Navigate a merge commit's parents
 
-M has two parents. ^ picks one, ~ walks first-parent steps:
+M has two parents.
+^ picks one, ~ walks first-parent steps:
 
 ```shell
 git log --oneline M^1    # = M^, my tip at merge time
