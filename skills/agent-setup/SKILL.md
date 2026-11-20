@@ -1,6 +1,6 @@
 ---
 name: agent-setup
-description: Set up the shared agent workflow in a repo: submodule, AGENTS.md, hooks, local skills, plus the one-time machine plugin install.
+description: "Set up the shared agent workflow in a repo: submodule, AGENTS.md, hooks, local skills, plus the one-time machine plugin install."
 generated: true
 allowed-tools:
   - read

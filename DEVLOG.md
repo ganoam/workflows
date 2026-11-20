@@ -49,3 +49,8 @@ Chronology of work on this repository.
 
 - `recipes/agent-setup.md` extended with a "Dependency repo" variant: a repo that only ever lives as a `deps/` checkout (e.g. `deps/scripts`) skips the submodule step and points its `AGENTS.md` preamble at the sibling `../workflows`, falling back to `~/workspaceconfig/deps/workflows` then the injected plugin copies.
   Trigger: `scripts` is a helper repo never checked out in isolation, so it carries no own workflows pin but should still follow the workflow.
+
+## agent-setup skill registration fix (Nov 20)
+
+- Fixed `agent-setup` never appearing in the skill list: its generated wrapper's `description` held the recipe's first sentence as a plain YAML scalar containing `: `, so the frontmatter failed to parse.
+  Added a YAML-quoting rule to the `generate-skills` template (plain scalar when safe, otherwise double-quoted with `"` and `\` escaped) and re-emitted the wrapper; all 9 wrappers now parse.

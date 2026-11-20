@@ -39,6 +39,8 @@ allowed-tools:
 ---
 ```
 
+Emit `description` as a plain scalar when the sentence allows one; when it contains YAML specials (`: `, leading `#`, quotes, brackets), use a double-quoted scalar and escape `"` and `\`.
+
 Body for a shared recipe:
 
 ```markdown
