@@ -50,6 +50,10 @@ In a conflict, this file wins.
   The edit tool's inline diff is the presentation: show the change there and wait for the user's approval to apply it.
   One approval per edit: the approved text is exactly what gets applied.
   No exceptions, including `README.md`, `DEVLOG.md`, and other docs.
+- **Existing files are edited, never rewritten.**
+  When the target file already exists, present the change as an edit with an inline diff, never as a full-file write for approval.
+  The user reviews what changed; a write of the complete new content hides what the overwrite destroys.
+  If a complete rewrite is genuinely intended, say so explicitly and get approval for the overwrite itself.
 - **Prefer diffs and direct, readable edits.**
   No scripts that transform prose invisibly (python rewriting markdown, sed pipelines on docs).
   The user reviews the change, not the tooling.

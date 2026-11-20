@@ -54,3 +54,9 @@ Chronology of work on this repository.
 
 - Fixed `agent-setup` never appearing in the skill list: its generated wrapper's `description` held the recipe's first sentence as a plain YAML scalar containing `: `, so the frontmatter failed to parse.
   Added a YAML-quoting rule to the `generate-skills` template (plain scalar when safe, otherwise double-quoted with `"` and `\` escaped) and re-emitted the wrapper; all 9 wrappers now parse.
+
+## rules.md: edit diffs over full-file writes (Nov 20)
+
+- `agents/rules.md` gained a bullet under "Editing and style": an existing file is changed through an edit with an inline diff, never through a full-file write presented for approval, so the reviewer sees what changed rather than only the new content.
+  An intentional complete rewrite requires saying so explicitly and getting approval for the overwrite itself.
+  Trigger: agents repeatedly presented whole-file writes whose diffs hid what the overwrite destroyed.
