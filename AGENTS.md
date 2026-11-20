@@ -1,7 +1,7 @@
 # ganoam agent workflow
 
 This plugin ships the shared agent workflow used across the owner's projects.
-Two documents are binding, in this order:
+Three documents are binding, in this order:
 
 1. `deps/workflows/agents/rules.md`: hard rules.
    Read it and obey it unconditionally.
@@ -9,13 +9,16 @@ Two documents are binding, in this order:
    If the working repo does not carry the `deps/workflows` submodule, read `agents/rules.md` at the plugin root instead.
 2. `deps/workflows/agents/workflow.md`: operating guidelines.
    Binding unless `rules.md` or the user says otherwise; same fallback to the plugin copy when the submodule is absent.
+3. `deps/workflows/MdStyle.md`: prose style guide.
+   Binding wherever prose is written or edited, including code comments; `agents/rules.md` delegates to it.
+   Same fallback to the plugin copy when the submodule is absent.
 
 The `deps/workflows` checkout is canonical: each repo pins the workflow version it follows.
 Plugin files are only the fallback.
 
-Re-read both files at the start of every new task or work packet: edits in the repo's checkout take effect immediately, and this file only points at them.
+Re-read all three at the start of every new task or work packet: edits in the repo's checkout take effect immediately, and this file only points at them.
 
-After applying both, layer the working repository's own `AGENTS.md` on top: it holds project-local rules and deltas and wins on project-specific matters, but can never loosen `agents/rules.md`.
+After applying them, layer the working repository's own `AGENTS.md` on top: it holds project-local rules and deltas and wins on project-specific matters, but can never loosen `agents/rules.md`.
 
 Standing duties in every repo:
 

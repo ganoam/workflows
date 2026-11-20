@@ -12,7 +12,7 @@ Never leave tribal knowledge unwritten.
 
 Every non-trivial work item gets an entry in the house format (`recipes/devlog.md`): dated sections, terse per-packet bullets recording what was done and why.
 The user also works solo at any time, not only between sessions: check `git log` periodically during the session, and whenever something looks unfamiliar (files you did not touch, code you do not recognize), inspect the log for user commits.
-If undocumented, prompt the user with a draft entry for approval and update DEVLOG.md.
+If undocumented, prompt the proposed entry directly as an edit on `DEVLOG.md` (inline diff for approval), not as chat text.
 Do not infer intent.
 
 ## README.md: keep it accurate

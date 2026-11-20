@@ -66,8 +66,8 @@ In a conflict, this file wins.
   Read the surrounding code and docs before writing; follow the file's own style rather than importing a new one.
 - **Prefer explicit over inferred.**
   When a system needs a rule set (e.g. "which files are private"), an explicit opt-in list beats a dynamically derived one the user has to argue with.
-- **All prose follows `MdStyle.md`.**
-  The shared style guide is the single source of truth for prose style, including code comments; its rules are binding wherever prose is written or edited.
+- **All prose follows `MdStyle.md` at this repo's root (`deps/workflows/MdStyle.md` in consumer checkouts).**
+  Read it before writing or editing prose: it is the single source of truth for prose style, including code comments, and its rules are binding wherever prose is written or edited.
 
 ## Authorship and attribution
 
@@ -96,7 +96,7 @@ In a conflict, this file wins.
   When a session establishes a new convention, trap, or rule, update `AGENTS.md` as part of the same task, not later.
 - **Keep `DEVLOG.md` current.**
   Sessions get entries; periodically check `git log` for work done outside the session and prompt the user with a proposed entry when something is unfamiliar.
-  Prompt the user after each non-trivial work packet with a proposed entry.
+  After each non-trivial work packet, prompt the proposed entry directly as an edit on `DEVLOG.md` (inline diff for approval), not as chat text.
 - **Keep `README` accurate.**
   Structure, build, and workflow sections must reflect the current state of the repo.
 - **Human-targeted documents are written for humans**: README, DEVLOG, tricks, recipes.

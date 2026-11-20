@@ -84,3 +84,10 @@ Chronology of work on this repository.
 
 - `recipes/nvim-sv.md` added from the owner's `~/code/notes/project-setup.md`: LazyVerilog LSP setup (`lazyverilog.toml`, `vcode.f` via `gen_flist.py`, LSP debugging) plus the `nvim-lint` `fusesoc_verilator` path (`.nvim.lua` target, core `lint` target, SARIF/regex diagnostics).
   Generated wrapper `skills/nvim-sv/SKILL.md` emitted per the `generate-skills` template.
+
+## MdStyle promoted to binding doc (Nov 20)
+
+- `AGENTS.md` now lists `MdStyle.md` as a third binding document alongside `rules.md` and `workflow.md` (same plugin fallback, re-read at every task start), and `rules.md` gained an explicit "read it before writing or editing prose" duty plus the consumer-checkout path.
+  Trigger: an agent ignored the markdown style rules although they were already binding via the `rules.md` pointer; the fix makes the guide a first-class required read instead of a rule that merely names it.
+- DEVLOG entry proposals now go directly through an edit on `DEVLOG.md` (inline diff for approval) instead of chat drafts, in both `rules.md` and `workflow.md`.
+- `BACKLOG.md` added as a durable home for deferred items (this repo's public/private wiring, the `tricks/git-tricks.md` content bugs); it is meant to become a `.gitprivate` path once that setup lands.
