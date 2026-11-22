@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Remind before every file edit that edits need approval first.
 
 == Intent ==

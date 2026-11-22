@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Compare the repo AGENTS.md preamble against the canonical template.
 
 == Intent ==

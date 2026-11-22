@@ -1,5 +1,6 @@
 # Maintaining and extending the workflows plugin
 
+Agent-maintained; human reviewed.
 Human-facing guide.
 Binding rules for agents live in `agents/`; this file is about mechanics: how the pieces fit and what to do when you change them.
 

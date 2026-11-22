@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Remind to check ROADMAP.md after a DEVLOG.md edit.
 
 == Intent ==

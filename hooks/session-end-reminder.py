@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Inject the session-end checklist at Stop.
 
 == Intent ==

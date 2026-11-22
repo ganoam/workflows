@@ -1,5 +1,6 @@
 # Roadmap
 
+Agent-maintained; human reviewed.
 Goal: one install gives every project the same agent workflow (binding rules, operating conventions, discoverable recipes) with minimal per-repo setup.
 Procedure doc: `recipes/agent-setup.md`; maintenance doc: `MAINTAINING.md`.
 

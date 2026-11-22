@@ -1,5 +1,6 @@
 # workflows
 
+Agent-maintained; human reviewed.
 Shared working conventions, reusable procedures, and tool knowledge for my projects.
 Doubles as a Devin plugin (`skills/` + `.devin-plugin/`): the plugin provides discovery (skill list, injected root `AGENTS.md`), while each project's `deps/workflows` checkout is the canonical content: projects pin the workflow version they follow.
 
@@ -24,3 +25,6 @@ Doubles as a Devin plugin (`skills/` + `.devin-plugin/`): the plugin provides di
 
 Audience and upkeep rules live in `agents/workflow.md`; binding behavioral rules in `agents/rules.md`.
 Everything outside `agents/` is written for human readers but its content binds agents too.
+Files the agent authors or keeps updated carry a provenance mark at the head (`Agent-generated`, `Agent-maintained`, see `agents/rules.md`).
+Agent-facing documents carry no mark so their text stays clean for verbatim copying and agent consumption: `AGENTS.md`, `agents/`, `MdStyle.md`, `recipes/`, `skills/`.
+Most of them are `Agent-maintained; human reviewed` in substance.

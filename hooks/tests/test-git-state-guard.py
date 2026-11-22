@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Exercise git-state-guard.py against a table of command cases.
 
 == Intent ==

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Block the write tool when the target file already exists.
 
 == Intent ==

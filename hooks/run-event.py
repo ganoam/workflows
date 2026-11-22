@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Dispatch a hooks.json event/matcher group to its hook scripts.
 
 == Intent ==

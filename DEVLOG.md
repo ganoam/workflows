@@ -1,6 +1,6 @@
 # Devlog
 
-Agent-maintained; Human reviewed.
+Agent-maintained; human reviewed.
 Chronology of work on this repository.
 
 ## 2026-11-18: Repo setup and agent docs consolidation
@@ -136,3 +136,9 @@ Owner solo work on `main`, merged into `private`.
 - `agents/rules.md` gained a `## Provenance marks` section: agent-authored files carry `Agent-generated` at the head (preamble for documents, head comment for code), files the agent keeps updated carry `Agent-maintained` instead, and review state rides on the mark: `; human reviewed` after human review, `; output verified` for non-essential code whose output was checked.
 - `agents/workflow.md` gained the mechanics: mark added at file creation, review remark appended only on owner say-so (never self-applied), exact greppable strings, one mark line per file, and mark-on-touch for files predating the convention.
   Editing an owner-authored file does not mark it.
+
+## 2026-11-22: Provenance marks applied, agent-facing docs exempt
+
+- Marks applied across the repo: `# Agent-generated; human reviewed` head comments on the `hooks/` scripts, `Agent-maintained; human reviewed` on the human-facing docs README/MAINTAINING/ROADMAP/BACKLOG (the owner upgraded the proposed marks to record the maintenance duty).
+  `tricks/` stay unmarked as owner-authored; JSON and list files carry no mark for lack of comment syntax.
+- Owner decided the scope carve-out: agent-facing documents (`AGENTS.md`, `agents/`, `MdStyle.md`, `recipes/`, `skills/`) stay unmarked so their text stays clean for verbatim copying and agent consumption; the exemption list is recorded in README's `## Conventions`.

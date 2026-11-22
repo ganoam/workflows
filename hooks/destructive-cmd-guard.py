@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Block destructive commands at PreToolUse.
 
 == Intent ==

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Remind about the no-em-dashes prose rule when an edit introduces one.
 
 == Intent ==

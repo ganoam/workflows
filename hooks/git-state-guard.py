@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 r"""Block state-changing git commands at PreToolUse.
 
 == Intent ==

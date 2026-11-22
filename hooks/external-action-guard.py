@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Agent-generated; human reviewed.
 """Block external actions via the gh CLI at PreToolUse.
 
 == Intent ==
