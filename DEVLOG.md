@@ -163,3 +163,4 @@ Owner solo work on `main`, merged into `private`.
 
 - `recipes/roadmap.md` upkeep gained the pivot rule: superseded items are struck through (`~~[x] ...~~`) and the new plan added with a dated line recording the pivot and its why; rewriting a checked item to match the new plan is out.
   Codifies what the consistency-model pivot did in this repo's ROADMAP; the injected `AGENTS.md` ROADMAP duty now points at it.
+- snippet: `tricks/bash-tricks.md` gained the `while IFS= read ... done << $var` trick; `tricks/git-tricks.md` gained branch rename / default-branch switch.
