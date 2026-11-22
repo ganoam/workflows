@@ -398,3 +398,16 @@ git log --graph --oneline
 ```
 
 The one command that makes merge topology legible.
+
+## Switch the remote default branch (master -> main)
+
+```shell
+git push origin master:refs/heads/main   # create main at master's tip
+gh repo edit --default-branch main       # flip the default (or GitHub: Settings -> Branches)
+git fetch origin
+git remote set-head origin -a            # origin/HEAD -> origin/main (or: set-head origin main)
+git push origin :master                  # delete old master once main is verified
+```
+
+`remote set-head` rewrites `refs/remotes/origin/HEAD`: tools resolving the public branch via `origin/HEAD` (e.g. `publish.sh`) follow automatically.
+Rename a local branch too if it exists: `git branch -m master main && git branch -u origin/main`.
