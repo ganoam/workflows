@@ -66,3 +66,4 @@ There is no dating and no chronology: the file always shows what is open now, no
 The same scan maintains it: whenever the day's material, gap fills included, shows a substantial work stream starting or completing in any project, propose an entry for approval.
 One line per event carrying the work's real date; new projects, major features or phases, and large landings qualify, routine upkeep does not.
 Entries group under an era heading when a period has a recognizable theme; otherwise they keep a plain dated chronology, newest at the bottom.
+Era headings are never duplicated: a new entry merges into an existing era when its theme already has one.
