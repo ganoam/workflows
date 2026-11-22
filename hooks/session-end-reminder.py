@@ -37,10 +37,12 @@ import sys
 
 CHECKLIST = (
     'Session-end check (workflow.md): if this session completed work, '
-    'make sure DEVLOG.md records the packet (outcome, not just your '
-    'edits), and that AGENTS.md, README.md, ROADMAP.md, and BACKLOG.md '
-    'still reflect reality: prune backlog items that landed, check off '
-    'roadmap entries, fix stale docs in the same task.'
+    'make sure DEVLOG.md has a prepared entry (outcome, not just your '
+    'edits) ready to commit with the work, and that AGENTS.md, '
+    'README.md, ROADMAP.md, and BACKLOG.md still reflect reality: '
+    'in-progress uncommitted items move into ## In flight, landed '
+    'items are pruned, roadmap entries checked off, stale docs fixed '
+    'in the same task.'
 )
 
 

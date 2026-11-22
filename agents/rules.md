@@ -99,10 +99,12 @@ In a conflict, this file wins.
   Whenever the workflows checkout the repo follows changes, by edit, pin bump, or otherwise, a repo copy differing beyond the pointer path for its repo type is drift: propose the sync like any other edit.
 - **Keep `DEVLOG.md` current.**
   Sessions get entries; periodically check `git log` for work done outside the session and prompt the user with a proposed entry when something is unfamiliar.
+  A change counts as done once it is committed together with its docs: the entry, and any README update the work calls for, is prepared alongside the work and lands in the same commit; in-progress uncommitted work is meanwhile tracked in `BACKLOG.md`'s `## In flight` section.
   After each non-trivial work packet, prompt the proposed entry directly as an edit on `DEVLOG.md` (inline diff for approval), not as chat text.
 - **Keep `BACKLOG.md` current where one exists.**
   Deferred work items, written by the user or at the user's request only.
   Your duty is maintenance, not authorship: when an item lands, propose its removal in the same task.
+  An item lands when its change is committed; started-but-uncommitted work moves it into the file's `## In flight` section, whose `###` subsections keep the original groupings.
   The file is invisible to all other documents: never name it or its contents in README, DEVLOG, digests, or any other document.
   Exceptions are the binding layer that defines its duties (`rules.md`, `workflow.md`, `AGENTS.md`, recipes) and the overall notes backlog the snippet recipe maintains, which exists to mirror open items.
 - **Keep `README` accurate.**

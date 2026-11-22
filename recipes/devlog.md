@@ -6,6 +6,7 @@ The file itself stays project-local.
 ## When to write
 
 `agents/workflow.md` owns the duty: an entry per non-trivial work packet, including owner solo work discovered via `git log`.
+A packet is written up alongside the work itself: the entry is prepared in the same working tree and committed with the change, while uncommitted in-progress work is staged in `BACKLOG.md`'s `## In flight` section.
 This file only defines what an entry looks like.
 
 ## Format

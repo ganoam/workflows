@@ -3,10 +3,11 @@
 
 == Intent ==
 
-rules.md makes BACKLOG.md a maintained document: when a task lands
-a deferred item, its removal is proposed in the same task. DEVLOG
-entries are exactly where landing gets recorded, so an edit to a
-DEVLOG.md is the right moment to surface the check mechanically.
+rules.md makes BACKLOG.md a maintained document: a deferred item
+lands when its change is committed, and its removal is proposed in
+the same task. DEVLOG entries are exactly where landing gets
+recorded, so an edit to a DEVLOG.md is the right moment to surface
+the check mechanically.
 
 == Method ==
 

@@ -11,6 +11,7 @@ Never leave tribal knowledge unwritten.
 ## DEVLOG.md: session memory
 
 Every non-trivial work item gets an entry in the house format (`recipes/devlog.md`): dated sections, terse per-packet bullets recording what was done and why.
+An item counts as done once its change is committed together with its docs: the entry, and any README update the work calls for, is prepared alongside the work and lands in the same commit; uncommitted in-progress work is staged in `BACKLOG.md`'s `## In flight` section meanwhile.
 The user also works solo at any time, not only between sessions: check `git log` periodically during the session, and whenever something looks unfamiliar (files you did not touch, code you do not recognize), inspect the log for user commits.
 If undocumented, prompt the proposed entry directly as an edit on `DEVLOG.md` (inline diff for approval), not as chat text.
 Do not infer intent.
