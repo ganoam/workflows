@@ -34,6 +34,8 @@ A small or single-purpose repo does not need one: do not cargo-cult it.
 - Mark done honestly: "builds" and "runs end-to-end" are different items.
   If only the weaker one passed, it stays unchecked or the item gets split.
 - Retire a phase by checking it off; keep it visible since the order still explains the plan.
+- Pivot honestly: when a decision replaces a plan, strike the superseded items through (`~~[x] ...~~`) and add the new items with a dated line recording the pivot and its why.
+  Rewriting a checked item to match the new plan pretends the pivot never happened.
 - One canonical roadmap per repo.
   When a superseding structure arrives, fold content in and let the old planning file go.
 

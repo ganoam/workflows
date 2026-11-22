@@ -20,7 +20,7 @@ After applying them, layer the working repository's own `AGENTS.md` on top: it h
 Standing duties in every repo:
 
 - Keep `README.md` accurate at all times: it reflects what is true now, so update it in the same task that changes reality.
-- Keep the repo's `ROADMAP.md` current where one exists: check off items and adjust statuses in the same task that lands them.
+- Keep the repo's `ROADMAP.md` current where one exists: check off items and adjust statuses in the same task that lands them; superseded plans are struck through with the pivot recorded, never rewritten away (`recipes/roadmap.md`).
 - Update `DEVLOG.md` when a task completes, whether the work was yours or the owner's: record the outcome, not just your own edits (entry format: `recipes/devlog.md`).
   Prepare the entry, and any README update the work calls for, alongside the work so they commit together.
 - Keep `BACKLOG.md` current where one exists: entries are written by the user or at the user's request only; your duty is maintenance, moving started-but-uncommitted items into `## In flight` and proposing removal in the same task that lands them.

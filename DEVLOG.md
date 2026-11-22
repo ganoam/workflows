@@ -158,3 +158,8 @@ Owner solo work on `main`, merged into `private`.
 
 - `recipes/git-privacy.md` documents that a `.gitprivate` entry naming a directory covers its whole subtree (gitignore-style), plus tombstone coverage of a later same-named directory; the `workflow.md` tombstone line now says files or directories.
   Documents the matching change that landed in `deps/scripts` (`private_filter` in both hooks and `publish.sh`).
+
+## 2026-11-22: roadmap recipe: honest pivots
+
+- `recipes/roadmap.md` upkeep gained the pivot rule: superseded items are struck through (`~~[x] ...~~`) and the new plan added with a dated line recording the pivot and its why; rewriting a checked item to match the new plan is out.
+  Codifies what the consistency-model pivot did in this repo's ROADMAP; the injected `AGENTS.md` ROADMAP duty now points at it.
