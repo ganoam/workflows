@@ -4,7 +4,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "for d in \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$HOME/workspaceconfig/deps/workflows\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" sessionstart; done",
+          "command": "for d in \"$HOME/workspaceconfig/deps/workflows\" \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$DEVIN_PROJECT_DIR\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" sessionstart; done",
           "timeout": 10
         }
       ]
@@ -15,7 +15,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "for d in \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$HOME/workspaceconfig/deps/workflows\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" stop; done",
+          "command": "for d in \"$HOME/workspaceconfig/deps/workflows\" \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$DEVIN_PROJECT_DIR\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" stop; done",
           "timeout": 10
         }
       ]
@@ -27,7 +27,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "for d in \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$HOME/workspaceconfig/deps/workflows\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" pretooluse-exec; done",
+          "command": "for d in \"$HOME/workspaceconfig/deps/workflows\" \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$DEVIN_PROJECT_DIR\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" pretooluse-exec; done",
           "timeout": 15
         }
       ]
@@ -37,7 +37,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "for d in \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$HOME/workspaceconfig/deps/workflows\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" pretooluse-write; done",
+          "command": "for d in \"$HOME/workspaceconfig/deps/workflows\" \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$DEVIN_PROJECT_DIR\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" pretooluse-write; done",
           "timeout": 10
         }
       ]
@@ -47,7 +47,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "for d in \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$HOME/workspaceconfig/deps/workflows\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" pretooluse-edit-write; done",
+          "command": "for d in \"$HOME/workspaceconfig/deps/workflows\" \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$DEVIN_PROJECT_DIR\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" pretooluse-edit-write; done",
           "timeout": 10
         }
       ]
@@ -59,7 +59,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "for d in \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$HOME/workspaceconfig/deps/workflows\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" posttooluse-edit-write; done",
+          "command": "for d in \"$HOME/workspaceconfig/deps/workflows\" \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$DEVIN_PROJECT_DIR\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" posttooluse-edit-write; done",
           "timeout": 10
         }
       ]

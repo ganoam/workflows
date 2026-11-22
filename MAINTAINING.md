@@ -55,8 +55,8 @@ Re-run `generate-skills` to refresh the wrapper if the intro sentence changed: w
 
 ### Edit the rules
 
-`rules.md`/`workflow.md` changes take effect immediately in any session whose repo carries the `deps/workflows` checkout: the injected plugin AGENTS.md is only a pointer, and it instructs agents to re-read both files at the start of each task.
-In repos without the submodule, changes apply on the next session once the plugin copy is updated (`--local` installs are live-linked, so immediately there too).
+`rules.md`/`workflow.md` changes take effect immediately in any session on a machine with the canonical `~/workspaceconfig/deps/workflows` checkout: the injected plugin AGENTS.md is only a pointer, and it instructs agents to re-read both files at the start of each task.
+On machines resolving through the `deps/workflows` or `../workflows` fallbacks, changes apply once that checkout is updated.
 Follow the hierarchy above: rules tighten, never silently loosen; recipe conflicts get fixed in the recipe.
 
 ### Add a project-local recipe
@@ -76,7 +76,7 @@ Commit the deletion of both.
 ## Hooks
 
 `hooks.json` at the plugin root registers lifecycle hooks wherever the plugin is installed.
-It carries no scripting: one entry per (event, matcher) group resolves `hooks/run-event.py` through a candidate-path chain (consumer `deps/workflows/`, this repo, dep-checkout sibling `../workflows`, machine checkout `~/workspaceconfig/deps/workflows`) and hands it a dispatch key.
+It carries no scripting: one entry per (event, matcher) group resolves `hooks/run-event.py` through a candidate-path chain (canonical `~/workspaceconfig/deps/workflows` first, then consumer `deps/workflows/`, dep-checkout sibling `../workflows`, this repo) and hands it a dispatch key.
 `run-event.py` holds the `DISPATCH` table mapping each key to its `hooks/*.py` scripts, feeds the event payload to each, and merges their outputs (first `decision` wins, `additionalContext` strings join).
 Adding a hook is a self-documenting script under `hooks/` (style: `deps/scripts/util/verify-format-diff.py`) plus one `DISPATCH` line — `hooks.json` stays untouched.
 A case-table test under `hooks/tests/` goes with it (`test-<hook>.py`, same interface: JSON payload on stdin, verdict off stdout, exit 1 on mismatch).
@@ -101,7 +101,7 @@ Plugin hooks are best-effort and fail open: `agents/rules.md` remains the guaran
 ## Gotchas
 
 - Plugin install is per-machine (`devin plugins install`), not recorded in consumer repos.
-  The `deps/workflows` submodule is the canonical content anyway: each repo pins the workflow version it follows and plugin files are the fallback when the submodule is absent.
+  Content canonicality lives with `~/workspaceconfig/deps/workflows`: the plugin ships discovery only, and repo-local `deps/workflows` checkouts are the fallback tier.
 - Git-installed plugins snapshot at install time; `--local` links the checkout live.
   Use `--local` while iterating.
 - Git hooks (`deps/scripts` per consumer) are the real backstop for privacy rules: plugin `hooks.json` is documented fail-open; don't move the guardrail there yet.

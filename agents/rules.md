@@ -66,7 +66,7 @@ In a conflict, this file wins.
   Read the surrounding code and docs before writing; follow the file's own style rather than importing a new one.
 - **Prefer explicit over inferred.**
   When a system needs a rule set (e.g. "which files are private"), an explicit opt-in list beats a dynamically derived one the user has to argue with.
-- **All prose follows `MdStyle.md` at this repo's root (`deps/workflows/MdStyle.md` in consumer checkouts).**
+- **All prose follows `MdStyle.md` at the workflows checkout root (canonical: `~/workspaceconfig/deps/workflows/MdStyle.md`).**
   Read it before writing or editing prose: it is the single source of truth for prose style, including code comments, and its rules are binding wherever prose is written or edited.
 
 ## Authorship and attribution

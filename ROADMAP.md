@@ -28,12 +28,16 @@ The repo doubles as a Devin plugin: discovery (skill list, injected root `AGENTS
 
 ## Consistency model
 
-Per-repo pinned content vs. one machine-wide plugin install.
+One machine checkout as the canonical copy for every agent; the plugin ships discovery only.
+Pivoted 2026-11-22 from the per-repo pin model described by the struck items: each consumer's `deps/workflows` used to be the canonical content (repos pinned the workflow version they followed); now `~/workspaceconfig/deps/workflows` is canonical and repo-local checkouts are the fallback tier.
 
-- [x] Canonical-pin rule: consumer `deps/workflows` checkout is the content; plugin files are fallback when the submodule is absent.
-- [x] Wrappers and injected `AGENTS.md` resolve `deps/workflows/` first; shared vs. local wrapper bodies distinguished.
+- ~~[x] Canonical-pin rule: consumer `deps/workflows` checkout is the content; plugin files are fallback when the submodule is absent.~~
+- ~~[x] Wrappers and injected `AGENTS.md` resolve `deps/workflows/` first; shared vs. local wrapper bodies distinguished.~~
+- ~~[x] Drift check in `agent-setup` survey step.~~
+- [x] `~/workspaceconfig/deps/workflows` is the single canonical checkout; `deps/workflows` in the working repo and `../workflows` are fallbacks; absent all three, the agent warns and prompts to clone.
+- [x] Wrappers and injected `AGENTS.md` resolve the checkout chain; shared vs. local wrapper bodies distinguished.
+- [x] Checkout-chain verification in the `agent-setup` survey step.
 - [x] Re-read instruction in injected `AGENTS.md`: checkout edits take effect mid-session.
-- [x] Drift check in `agent-setup` survey step.
 - [x] Standing duties in injected `AGENTS.md`: README accurate, DEVLOG per task, propose recipes/tricks.
 - [x] `rules.md` edit-approval rule: verbatim inline diff, one approval per edit.
 
@@ -62,4 +66,5 @@ Optional strengthening work; items land when they land.
 - `workflow.md` is read-on-demand per the pointer (keeps injected context light); `rules.md` points at it.
 - `MdStyle.md` is bound by a `rules.md` pointer; proposed-rule candidates were dropped as document-specific.
 - Generated `skills/` wrappers are committed so the plugin is complete out of the box; regenerate via `generate-skills`, never hand-edit.
-- Plugin + submodule are both kept: plugin for mechanics, submodule for browsable docs, stable paths, and the version pin.
+- ~~Plugin + submodule are both kept: plugin for mechanics, submodule for browsable docs, stable paths, and the version pin.~~
+- Plugin + machine checkout are both kept after the 2026-11-22 pivot: plugin for mechanics (skills, hooks, injected pointer), `~/workspaceconfig/deps/workflows` as the canonical content; repo-local `deps/workflows` stays as the fallback tier.

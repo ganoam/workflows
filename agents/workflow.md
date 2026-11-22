@@ -67,7 +67,9 @@ Tombstone entries stay in `.gitprivate` after private files are deleted, so hist
 ## Dependencies and submodules
 
 Shared code and docs live in dependency repos checked out under `deps/`.
-The remote repository is canonical; no checkout is superior.
+For reading workflow documents, `~/workspaceconfig/deps/workflows` is the single canonical checkout on a machine; `deps/workflows` in the working repo and `../workflows` are fallbacks, and absent all three the agent warns and prompts to clone.
+For changing them, the remote repository is canonical; no checkout is superior.
+Workflow-doc edits happen in the canonical checkout, not in a consumer's `deps/workflows` clone.
 Edit only the working repo's own dependency clone.
 Propagation order: prepare changes in the dep clone, the user commits and pushes the dep repo, then the gitlink in the parent repo is bumped (also by the user).
 Do not edit dependency checkouts elsewhere on the machine.

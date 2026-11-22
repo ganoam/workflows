@@ -4,7 +4,7 @@ description: Workflow for repos that are mostly public but carry private files t
 generated: true
 ---
 
-Read `deps/workflows/recipes/git-privacy.md`, the repo's pinned checkout, and follow it end to end; if that submodule is absent, read `recipes/git-privacy.md` at the plugin root instead.
+Read `~/workspaceconfig/deps/workflows/recipes/git-privacy.md` and follow it end to end; if that checkout is absent, read `deps/workflows/recipes/git-privacy.md` in this repo, then `../workflows/recipes/git-privacy.md`; if none exists, warn the user and prompt them to clone the workflows repo.
 A `recipes/git-privacy.md` at the working repo's root overrides it: if present, read and follow that file instead.
 Its prose targets human readers; its content binds you.
 The binding rules in `agents/rules.md` apply unconditionally and override anything in that document.

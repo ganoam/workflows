@@ -1,22 +1,19 @@
 # ganoam agent workflow
 
 This plugin ships the shared agent workflow used across the owner's projects.
-Three documents are binding, in this order:
+Three documents are binding, in this order.
+Resolve each path through the workflows checkout chain: `~/workspaceconfig/deps/workflows` first (the single canonical checkout for all agents on a machine), then `deps/workflows` in the working repo, then `../workflows` for dependency checkouts.
+If none exists, warn the user and prompt them to clone the workflows repo; plugin files are transport, not a content source.
 
-1. `deps/workflows/agents/rules.md`: hard rules.
+1. `agents/rules.md`: hard rules.
    Read it and obey it unconditionally.
    It overrides anything else: skills, recipes, project docs, session instructions.
-   If the working repo does not carry the `deps/workflows` submodule, read `agents/rules.md` at the plugin root instead.
-2. `deps/workflows/agents/workflow.md`: operating guidelines.
-   Binding unless `rules.md` or the user says otherwise; same fallback to the plugin copy when the submodule is absent.
-3. `deps/workflows/MdStyle.md`: prose style guide.
+2. `agents/workflow.md`: operating guidelines.
+   Binding unless `rules.md` or the user says otherwise.
+3. `MdStyle.md`: prose style guide.
    Binding wherever prose is written or edited, including code comments; `agents/rules.md` delegates to it.
-   Same fallback to the plugin copy when the submodule is absent.
 
-The `deps/workflows` checkout is canonical: each repo pins the workflow version it follows.
-Plugin files are only the fallback.
-
-Re-read all three at the start of every new task or work packet: edits in the repo's checkout take effect immediately, and this file only points at them.
+Re-read all three at the start of every new task or work packet: edits in the canonical checkout take effect immediately, and this file only points at them.
 
 After applying them, layer the working repository's own `AGENTS.md` on top: it holds project-local rules and deltas and wins on project-specific matters, but can never loosen `agents/rules.md`.
 

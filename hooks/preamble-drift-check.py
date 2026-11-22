@@ -18,10 +18,10 @@ regardless of the script's depth or which copy the resolver ran;
 `agents/template.md` sits under it. The canonical preamble is
 everything in the template before the `<Canonical preamble:` marker
 note. The consumer preamble is everything in `$DEVIN_PROJECT_DIR/
-AGENTS.md` before its first `## ` section. Before comparing, every
-backticked path containing `workflows` is masked on both sides: that
-is the one sanctioned variation (deps/workflows vs ../workflows vs
-~/workspaceconfig/deps/workflows by repo type).
+AGENTS.md` before its first `## ` section. The compare is a byte
+compare modulo edge whitespace: the preamble is identical for all
+repo types now that the canonical checkout is a single machine
+path, so no variation is sanctioned.
 
 A drift hit prints `hookSpecificOutput.additionalContext` naming the
 divergence; identical (or absent) preambles produce no output.
@@ -31,12 +31,11 @@ divergence; identical (or absent) preambles produce no output.
 - Only files containing the canonical "Generic binding rules" line
   are checked; that exempts this repo's own AGENTS.md, which is the
   plugin rules file with a deliberately different preamble.
-- Whitespace at the edges is tolerated; interior differences
-  (missing sentences, extra sentences, stale two-doc wording, a
-  renamed title) are all reported as drift.
-- A false path variation (a repo type the mask does not cover) would
-  surface as drift, which is the safe direction: the human reviewing
-  the sync proposal sees the real diff.
+- Whitespace at the edges is tolerated; every interior difference
+  (missing or extra sentences, stale two-doc wording, a renamed
+  title, a hand-edited path) is reported as drift, which is the
+  safe direction: the human reviewing the sync proposal sees the
+  real diff.
 
 Usage: invoked by hooks.json (SessionStart, no matcher); stdin is
 the hook event JSON. Requires DEVIN_PROJECT_DIR.
@@ -44,7 +43,6 @@ the hook event JSON. Requires DEVIN_PROJECT_DIR.
 
 import json
 import os
-import re
 import subprocess
 import sys
 
@@ -52,10 +50,6 @@ import sys
 # Extraction and normalization
 # ------------------------------------------------------------------
 
-# The one sanctioned preamble variation: the pointer path into the
-# workflows checkout, which differs by repo type. Every backticked
-# span containing 'workflows' collapses to a fixed token.
-WF_PATH = re.compile(r'`[^`]*workflows[^`]*`')
 SENTINEL = 'Generic binding rules and operating workflow live in'
 
 
@@ -103,8 +97,8 @@ def repo_preamble():
 
 
 def norm(text):
-    """Mask pointer paths, drop edge whitespace for the compare."""
-    return WF_PATH.sub('<WF>', text).strip()
+    """Drop edge whitespace; the interior compare is exact."""
+    return text.strip()
 
 
 # ------------------------------------------------------------------

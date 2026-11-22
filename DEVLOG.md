@@ -142,3 +142,14 @@ Owner solo work on `main`, merged into `private`.
 - Marks applied across the repo: `# Agent-generated; human reviewed` head comments on the `hooks/` scripts, `Agent-maintained; human reviewed` on the human-facing docs README/MAINTAINING/ROADMAP/BACKLOG (the owner upgraded the proposed marks to record the maintenance duty).
   `tricks/` stay unmarked as owner-authored; JSON and list files carry no mark for lack of comment syntax.
 - Owner decided the scope carve-out: agent-facing documents (`AGENTS.md`, `agents/`, `MdStyle.md`, `recipes/`, `skills/`) stay unmarked so their text stays clean for verbatim copying and agent consumption; the exemption list is recorded in README's `## Conventions`.
+
+## 2026-11-22: Consistency model pivot to a single canonical checkout
+
+- The per-repo pin model replaced by a machine-canonical one: `~/workspaceconfig/deps/workflows` is the single binding checkout for all agents; `deps/workflows` in the working repo and `../workflows` (dependency checkouts) are fallbacks, and absent all three the agent warns the owner and prompts to clone.
+  Plugin copies dropped out of the doc-resolution chain: they are transport (skills, hooks, injected pointer), not a content source.
+  Wired through `AGENTS.md`, `agents/template.md`, `rules.md` (MdStyle path), `workflow.md`, README, MAINTAINING.
+- Consumer `AGENTS.md` preamble made identical for all repo types: the canonical block now names the chain, and `preamble-drift-check` tightened to a strict compare (path masking removed: no variation is sanctioned, so next agents get a drift verdict and do the sync).
+- `hooks.json` resolver chain reordered so the canonical checkout's hook code runs first.
+- `agent-setup` rewritten for the new model: submodule demoted to optional fallback checkout, repo-type variants collapsed onto the uniform preamble, and the canonical consumer README entry added as a paste-in boilerplate.
+- `generate-skills` template and the 9 generated wrappers re-pointed at the checkout chain.
+- ROADMAP records the pivot with the superseded items struck through rather than deleted (owner's call: do not pretend this was always the plan).

@@ -1,11 +1,12 @@
 # AGENTS.md: notes for anyone working in this repo
 
-Generic binding rules and operating workflow live in `deps/workflows/agents/` (`rules.md`, `workflow.md`) and the prose style guide `deps/workflows/MdStyle.md`; all apply in full here.
+Generic binding rules and operating workflow live in `~/workspaceconfig/deps/workflows/agents/` (`rules.md`, `workflow.md`) and the prose style guide `~/workspaceconfig/deps/workflows/MdStyle.md`; all apply in full here.
+Resolve them through the checkout chain: `~/workspaceconfig/deps/workflows`, then `deps/workflows` in this repo, then `../workflows` for dependency checkouts; if none exists, warn the owner and prompt them to clone the workflows repo.
 This file holds only repo-specific guidance.
 Keep it current per the shared rules.
 
 <Canonical preamble: everything from the `# AGENTS.md` title through this note's preceding line is copied verbatim into every consumer `AGENTS.md`.
-Keep it byte-identical so drift is a string compare; only the pointer path varies by repo type (`../workflows/` for dependency repos, `~/workspaceconfig/deps/workflows/` for stand-alone ones, see `recipes/agent-setup.md`).>
+Keep it byte-identical so drift is a string compare; it is identical for all repo types now that the canonical checkout is a single machine path.>
 
 ## What this is
 
@@ -20,7 +21,7 @@ Keep it byte-identical so drift is a string compare; only the pointer path varie
 
 ## Reusable workflows
 
-`deps/workflows/recipes/` documents reusable detailed workflows; a project-local `recipes/` directory, if present, layers on top and overrides.
+`~/workspaceconfig/deps/workflows/recipes/` documents reusable detailed workflows; a project-local `recipes/` directory, if present, layers on top and overrides.
 When a task falls under one, read and follow it.
 
 Project-local recipes here: <list or "none yet">

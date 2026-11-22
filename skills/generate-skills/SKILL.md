@@ -14,7 +14,7 @@ The recipe file stays the single source of truth; the wrapper adds only the disc
 
 ## Inputs
 
-- Shared recipes: `deps/workflows/recipes/*.md` in the consumer repo, or `recipes/*.md` when run inside the workflows repo itself.
+- Shared recipes: `~/workspaceconfig/deps/workflows/recipes/*.md` (canonical), falling back to `deps/workflows/recipes/` in the working repo, or `recipes/*.md` when run inside the workflows repo itself.
 - Project-local recipes: `recipes/*.md` in the working repo.
   A local recipe with the same basename wins over the shared one.
 
@@ -22,7 +22,7 @@ The recipe file stays the single source of truth; the wrapper adds only the disc
 
 For each recipe `<name>.md`, write `SKILL.md`:
 
-- shared recipe -> `deps/workflows/skills/<name>/SKILL.md` (or `skills/<name>/SKILL.md` inside the workflows repo)
+- shared recipe -> `skills/<name>/SKILL.md` in the resolved workflows checkout (`~/workspaceconfig/deps/workflows` canonical, `deps/workflows` fallback, `skills/` inside the workflows repo itself)
 - local recipe -> `.devin/skills/<name>/SKILL.md` in the working repo
 
 Wrapper content: same frontmatter for both, different body:
@@ -40,7 +40,7 @@ Emit `description` as a plain scalar when the sentence allows one; when it conta
 Body for a shared recipe:
 
 ```markdown
-Read `deps/workflows/recipes/<name>.md`, the repo's pinned checkout, and follow it end to end; if that submodule is absent, read `recipes/<name>.md` at the plugin root instead.
+Read `~/workspaceconfig/deps/workflows/recipes/<name>.md` and follow it end to end; if that checkout is absent, read `deps/workflows/recipes/<name>.md` in this repo, then `../workflows/recipes/<name>.md`; if none exists, warn the user and prompt them to clone the workflows repo.
 A `recipes/<name>.md` at the working repo's root overrides it: if present, read and follow that file instead.
 Its prose targets human readers; its content binds you.
 The binding rules in `agents/rules.md` apply unconditionally and override anything in that document.

@@ -2,7 +2,7 @@
 
 Agent-maintained; human reviewed.
 Shared working conventions, reusable procedures, and tool knowledge for my projects.
-Doubles as a Devin plugin (`skills/` + `.devin-plugin/`): the plugin provides discovery (skill list, injected root `AGENTS.md`), while each project's `deps/workflows` checkout is the canonical content: projects pin the workflow version they follow.
+Doubles as a Devin plugin (`skills/` + `.devin-plugin/`): the plugin provides discovery (skill list, injected root `AGENTS.md`), while `~/workspaceconfig/deps/workflows` is the single canonical checkout every agent follows, with a repo-local `deps/workflows` (or `../workflows` in dependency checkouts) as the fallback on machines without it.
 
 ## Layout
 
