@@ -40,4 +40,4 @@ A small or single-purpose repo does not need one: do not cargo-cult it.
 ## Examples in the wild
 
 - `hw-commons/ROADMAP.md`: goal, phases 0-5, reuse-map appendix, notes and low-prio.
-- This repo's `ROADMAP.md`: goal, phases 0-4, notes and open decisions.
+- This repo's `ROADMAP.md`: goal, workstream sections instead of phases (deviation from the spine: the repo evolves organically, so the phased frame was dropped), notes and open decisions.

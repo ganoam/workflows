@@ -3,7 +3,9 @@
 Goal: one install gives every project the same agent workflow (binding rules, operating conventions, discoverable recipes) with minimal per-repo setup.
 Procedure doc: `recipes/agent-setup.md`; maintenance doc: `MAINTAINING.md`.
 
-## Phase 0: Foundation docs (done)
+The repo evolves by need rather than by plan: sections accumulate as workstreams emerge, order is historical, and item checkboxes carry the status.
+
+## Foundation docs
 
 Shared conventions distilled from the `hw-commons` sessions and reviewed by the owner.
 
@@ -12,7 +14,7 @@ Shared conventions distilled from the `hw-commons` sessions and reviewed by the 
   Contents live in the directory itself.
 - [x] `tricks/` populated; `README.md`, `DEVLOG.md`, `MAINTAINING.md`.
 
-## Phase 1: Plugin packaging (done)
+## Plugin packaging
 
 The repo doubles as a Devin plugin: discovery (skill list, injected root `AGENTS.md`) on top of the docs.
 
@@ -23,7 +25,7 @@ The repo doubles as a Devin plugin: discovery (skill list, injected root `AGENTS
 - [x] Restrict-never-permit convention in `workflow.md`.
 - [ ] Install test: `devin plugins install --local`, verify `/workflows:*` skills list and rules inject.
 
-## Phase 2: Consistency model (done)
+## Consistency model
 
 Per-repo pinned content vs. one machine-wide plugin install.
 
@@ -34,7 +36,7 @@ Per-repo pinned content vs. one machine-wide plugin install.
 - [x] Standing duties in injected `AGENTS.md`: README accurate, DEVLOG per task, propose recipes/tricks.
 - [x] `rules.md` edit-approval rule: verbatim inline diff, one approval per edit.
 
-## Phase 3: Rollout (in progress)
+## Rollout
 
 Apply `recipes/agent-setup.md` per repo; hw-commons is the pilot.
 
@@ -42,10 +44,12 @@ Apply `recipes/agent-setup.md` per repo; hw-commons is the pilot.
 - [ ] `hw-commons`: run `generate-skills` -> `.devin/skills/` for local recipes (untracked or private, owner's call); README getting-started line for plugin install.
 - [ ] Remaining consumer repos (list kept private): submodule + template `AGENTS.md` + hooks each.
 
-## Phase 4: Hardening (later, optional)
+## Hardening
+
+Optional strengthening work; items land when they land.
 
 - [ ] `permissions.deny` on skills (block exec for doc procedures).
-- [ ] Plugin `hooks.json` for git guards: documented fail-open today; `deps/scripts` hooks stay the real backstop; revisit when hardened.
+- [x] Plugin `hooks.json` for git guards: documented fail-open today; `deps/scripts` hooks stay the real backstop; revisit when hardened.
 - [ ] Consumer README boilerplate line with the plugin install command.
 - [x] Em-dash consistency: `rules.md` forbids em-dashes in generated text, but this repo's own docs and the `generate-skills` wrapper template still use them.
   Sweep docs and template, or declare generated wrappers exempt.
