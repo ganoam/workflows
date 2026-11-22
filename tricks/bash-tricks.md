@@ -66,3 +66,16 @@ sed "s|~/workspaceconfig|$ROOT|g" "$ROOT/deps/dwl/dwl.desktop" |
   `tee` puts the write inside the elevated process.
 - `> /dev/null`: drops tee's stdout echo (it copies stdin to stdout AND the file); the file write is unaffected.
 - `&&`: with `pipefail` this needs sed AND tee to succeed.
+
+## Loop over lines of a variable: `while IFS= read -r` + herestring
+
+```bash
+while IFS= read -r line; do
+  case $line in "$pat") ... ;; esac
+done <<< "$var"
+```
+
+- `<<< "$var"` feeds the variable to the loop's stdin (plus a trailing newline); `read` takes one line per pass, EOF ends the loop.
+- `IFS=` stops `read` stripping leading/trailing whitespace, `-r` keeps backslashes literal: both needed for paths.
+- Prefer this over `echo "$var" | while read`: a piped `while` runs in a subshell and any state set inside the loop body dies with it; `<<<` keeps the loop in the current shell.
+- `read` returns non-zero on a final line without a newline, but still fills `line`: input built by `printf` or command substitution always ends in newline, so no edge case here.
