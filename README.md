@@ -6,6 +6,8 @@ Doubles as a Devin plugin (`skills/` + `.devin-plugin/`): the plugin provides di
 ## Layout
 
 - `.devin-plugin/`: plugin manifest.
+- `hooks.json`: plugin lifecycle hooks, one dispatcher call per (event, matcher) group.
+- `hooks/`: self-documenting hook scripts plus `run-event.py`, the dispatcher whose `DISPATCH` table wires them.
 - `AGENTS.md`: plugin-root rule file injected into every session; points at the binding docs and states precedence and standing duties.
 - `agents/`: documents written for AI agents: binding rules and operating workflow that apply across repos, plus `template.md`, the consumer-repo `AGENTS.md` template.
   A project's `AGENTS.md` points here and holds only repo-specific deltas.

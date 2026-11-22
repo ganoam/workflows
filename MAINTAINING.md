@@ -8,8 +8,9 @@ Binding rules for agents live in `agents/`; this file is about mechanics: how th
 ```
 workflows/
 ├── .devin-plugin/plugin.json   # plugin manifest (name: workflows)
-├── hooks.json                  # plugin lifecycle hooks (e.g. BACKLOG
-│                               #   reminder on DEVLOG edits)
+├── hooks.json                  # plugin lifecycle hooks (table below)
+├── hooks/                      # file-based hook scripts referenced
+│                               #   from hooks.json (self-documenting)
 ├── AGENTS.md                   # plugin rule injected every session:
 │                               #   rules.md > workflow.md > MdStyle.md > consumer AGENTS.md
 ├── agents/
@@ -23,7 +24,6 @@ workflows/
 ├── README.md                   # what this repo is (directory map)
 ├── ROADMAP.md                # the buildout plan / status
 ├── DEVLOG.md                 # chronology
-├── BACKLOG.md                # deferred work items
 ├── MAINTAINING.md            # this file
 └── MdStyle.md                # prose style guide
 ```
@@ -71,6 +71,31 @@ Follow `recipes/agent-setup.md`: submodule this repo to `deps/workflows`, write 
 
 Delete `recipes/<name>.md`; `generate-skills` prunes the generated wrapper.
 Commit the deletion of both.
+
+## Hooks
+
+`hooks.json` at the plugin root registers lifecycle hooks wherever the plugin is installed.
+It carries no scripting: one entry per (event, matcher) group resolves `hooks/run-event.py` through a candidate-path chain (consumer `deps/workflows/`, this repo, dep-checkout sibling `../workflows`, machine checkout `~/workspaceconfig/deps/workflows`) and hands it a dispatch key.
+`run-event.py` holds the `DISPATCH` table mapping each key to its `hooks/*.py` scripts, feeds the event payload to each, and merges their outputs (first `decision` wins, `additionalContext` strings join).
+Adding a hook is a self-documenting script under `hooks/` (style: `deps/scripts/util/verify-format-diff.py`) plus one `DISPATCH` line — `hooks.json` stays untouched.
+A case-table test under `hooks/tests/` goes with it (`test-<hook>.py`, same interface: JSON payload on stdin, verdict off stdout, exit 1 on mismatch).
+The `id` in the table below is the script path; `run-event.py`'s table links it to its group.
+Plugin hooks are best-effort and fail open: `agents/rules.md` remains the guarantee, hooks are the reminder or backstop.
+
+| id | event | matcher | enforces | behavior |
+|---|---|---|---|---|
+| `hooks/git-state-guard.py` | `PreToolUse` | `^exec$` | `rules.md` repo-state and ref rules | Blocks state-changing `git` verbs; read-only forms and `/tmp` commands pass. `config` scope flags shift the judgment to the key/value pair, so scoped writes block while scoped reads pass. |
+| `hooks/devlog-backlog-reminder.py` | `PostToolUse` | `^(edit\|write)$` | `rules.md` BACKLOG duty | On `DEVLOG.md` edits, injects a reminder to prune landed (committed) backlog items. |
+| `hooks/devlog-readme-check.py` | `PostToolUse` | `^(edit\|write)$` | `AGENTS.md` README-accuracy duty | On `DEVLOG.md` edits, injects a conditional check: logged work that changed what README documents gets a same-task update proposal. A reminder, not a semantic verdict. |
+| `hooks/devlog-roadmap-check.py` | `PostToolUse` | `^(edit\|write)$` | `AGENTS.md` ROADMAP-currency duty | On `DEVLOG.md` edits, injects a conditional check: logged work that landed a roadmap item gets checked off or re-statused in the same task. Silent where no ROADMAP exists (the duty itself is conditional). |
+| `hooks/external-action-guard.py` | `PreToolUse` | `^exec$` | `rules.md` external-actions rules | Blocks mutating `gh` subcommands, non-GET `gh api`, and all `gh auth`; read verbs pass. `curl`/`mail`/`ssh` stay rule-only. |
+| `hooks/destructive-cmd-guard.py` | `PreToolUse` | `^exec$` | `rules.md` destructive-ops and edit-approval rules | Blocks deletion primitives and commands that overwrite or in-place-modify existing files (stat-checked: `>`, `tee`, `mv`/`cp` over files, `sed`/`perl -i`); `>>` appends and `/tmp` pass. Stricter than the rule: confirmed destructive ops are blocked too, the user runs them. Interpreter writes (`python -c`) and `rsync --delete`-style dir effects are not caught. |
+| `hooks/write-overwrite-guard.py` | `PreToolUse` | `^write$` | `rules.md` edits-never-rewrites rule | Blocks `write` when the target file exists; the change goes through `edit` or the user applies the rewrite. |
+| `hooks/edit-approval-reminder.py` | `PreToolUse` | `^(edit\|write)$` | `rules.md` edit-approval rule | Injects the approval rule on every edit/write call; a reminder, not a gate: approval status is conversation state the payload cannot carry, so no mechanical verdict exists. |
+| `hooks/em-dash-reminder.py` | `PostToolUse` | `^(edit\|write)$` | `MdStyle.md` no-em-dashes | Counts unicode dashes in the applied edit/write text and injects the rule + allowed replacements; a reminder, not a gate (justified deviations permitted). |
+| `hooks/session-start-reminder.py` | `SessionStart` | none | `workflow.md` session-start duties | Injects the session-start checklist: re-read binding docs, read repo `AGENTS.md`/`DEVLOG.md`, check `git status`/`git log` for unfamiliar work. Re-fires on resume/clear by design. The preamble-sync duty is deliberately not listed: `preamble-drift-check.py` performs that compare. |
+| `hooks/preamble-drift-check.py` | `SessionStart` | none | `rules.md` preamble-sync duty | Performs the compare the duty asks for: repo `AGENTS.md` preamble vs the `<Canonical preamble:` block in `agents/template.md`, pointer paths masked; injects a drift verdict only when they differ. Files without the canonical opener are out of scope (exempts this repo's own plugin AGENTS.md). |
+| `hooks/session-end-reminder.py` | `Stop` | none | `workflow.md` session-end duties | Injects a conditional session-end check: DEVLOG entry prepared alongside the work for a shared commit, AGENTS/README/ROADMAP currency, BACKLOG maintenance (`## In flight` staging plus pruning landed items). Never blocks (block-on-Stop can loop); fires on mid-session pauses too, so the check is phrased conditionally. |
 
 ## Gotchas
 
