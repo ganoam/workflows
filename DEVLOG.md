@@ -107,3 +107,25 @@ Chronology of work on this repository.
   Duty added in `rules.md`, `workflow.md` layering and session lifecycle, injected `AGENTS.md`, `MAINTAINING.md`, and the file's own header.
 - `hooks.json` added at the plugin root: a `PostToolUse` hook on `edit`/`write` injects a reminder to check `BACKLOG.md` whenever a `DEVLOG.md` is edited, so the maintenance duty fires mechanically instead of relying on recall.
   Plugin hooks are fail-open; the `rules.md` duty stays the backstop.
+
+## 2026-11-20: Plugin hook infrastructure, snippet digest extensions
+
+Owner solo work found via `git log`.
+
+- `hooks/` landed: `run-event.py` dispatches Devin plugin hook events to per-event scripts, wired through `hooks.json` for SessionStart, Stop, PreToolUse (exec, write, edit/write), and PostToolUse (edit/write).
+  The set: session start/end reminders, git-state and destructive-command guards, external-action guard, write-overwrite guard, em-dash reminder, preamble-drift check, devlog README/ROADMAP/deferred-items checks, edit-approval reminder; one test suite under `hooks/tests/`.
+- `recipes/snippet.md` gained a third output: `~/code/notes/backlog.md`, a cross-repo mirror of open deferred items regenerated wholesale each run (per-project files stay the source of truth).
+  The same scan now flags uncommitted work: a dirty `git status` adds an `uncommitted:` bullet under the repo's digest section, so commit-less work stays visible.
+
+## 2026-11-22: Deferred-items in-flight model, hooks docs, snippet polish
+
+Owner solo work on `main`, merged into `private`.
+
+- Deferred-items tracking refined into started-vs-landed: started-but-uncommitted work moves an item into a dedicated `## In flight` section under its original `###` grouping; an item lands when its change commits together with its docs.
+  Wired through `rules.md`, `workflow.md`, injected `AGENTS.md`, `recipes/devlog.md`, and the session-end and devlog-reminder hooks.
+- The deferred-items file made invisible to all other documents: `rules.md` now forbids naming it or its contents in README, DEVLOG, snippets, and era digest; the devlog and snippet recipes carry the same rule, the notes mirror excepted.
+- The edit-approval reminder got its own PreToolUse edit/write wiring in `hooks.json` and `run-event.py`.
+- Hook set documented: `MAINTAINING.md` gained a hooks walkthrough, README a pointer.
+- `recipes/snippet.md` polish: per-project `last:` lines in the notes mirror (recent work inferred from file mtimes, not the DEVLOG), a one-line summary opening each digest section, era-digest heading deduping.
+- ROADMAP restructured: phase numbering dropped for plain themed sections ("evolves by need rather than by plan"), item statuses adjusted.
+- `.gitprivate` now lists itself, so the private-path declaration is itself private.
