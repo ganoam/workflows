@@ -96,6 +96,17 @@ Isolate the bug, write the minimal reproducer, and draft the report or PR text f
 Submission is always manual by the user; the agent produces the text, the evidence, and the proposed target (repo, title, body).
 Never submit, comment, or open anything.
 
+## Provenance marks
+
+Mechanics for the marks `rules.md` defines.
+
+- Placement: under the title for documents, in a head comment for code (after shebang and license header where those exist), always in the file's own comment syntax.
+- The mark is added when the file is created; `Agent-maintained` replaces `Agent-generated` on files the agent keeps updated over time.
+- The review remark (`human reviewed` or `output verified`) is appended to the same line only once the owner states the review or output check happened; the agent never self-applies it.
+- Editing an owner-authored file does not mark it: the mark records the file's provenance, not every line's.
+- The strings are exact so marks stay greppable; a file carries one mark line.
+- Files predating the convention get marked on next touch; no silent sweep.
+
 ## Change review loop
 
 Prepared changes are presented for human review before they are finalized: diffs or direct readable edits, not opaque transformations.

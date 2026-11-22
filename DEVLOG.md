@@ -1,5 +1,6 @@
 # Devlog
 
+Agent-maintained; Human reviewed.
 Chronology of work on this repository.
 
 ## 2026-11-18: Repo setup and agent docs consolidation
@@ -129,3 +130,9 @@ Owner solo work on `main`, merged into `private`.
 - `recipes/snippet.md` polish: per-project `last:` lines in the notes mirror (recent work inferred from file mtimes, not the DEVLOG), a one-line summary opening each digest section, era-digest heading deduping.
 - ROADMAP restructured: phase numbering dropped for plain themed sections ("evolves by need rather than by plan"), item statuses adjusted.
 - `.gitprivate` now lists itself, so the private-path declaration is itself private.
+
+## 2026-11-22: Provenance marks convention
+
+- `agents/rules.md` gained a `## Provenance marks` section: agent-authored files carry `Agent-generated` at the head (preamble for documents, head comment for code), files the agent keeps updated carry `Agent-maintained` instead, and review state rides on the mark: `; human reviewed` after human review, `; output verified` for non-essential code whose output was checked.
+- `agents/workflow.md` gained the mechanics: mark added at file creation, review remark appended only on owner say-so (never self-applied), exact greppable strings, one mark line per file, and mark-on-touch for files predating the convention.
+  Editing an owner-authored file does not mark it.

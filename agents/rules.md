@@ -81,6 +81,16 @@ In a conflict, this file wins.
   Dependency checkouts elsewhere on the machine are not canonical.
   No checkout is superior; the remote repository is the source of truth.
 
+## Provenance marks
+
+- **Agent-generated files carry `Agent-generated` at the head.**
+  Preamble for documents, head comment for code: scripts, programs, HDL, whatever the file type.
+- **Agent-maintained files carry `Agent-maintained` at the head.**
+  For files the agent keeps updated over time (logs, digests, generated lists); it takes the place of the generation mark.
+- **Review state is recorded on the mark.**
+  Agent-generated content is expected to be reviewed by a human before it is trusted.
+  After human review the mark reads `Agent-generated; human reviewed`; for non-essential code, verified output is enough and the mark reads `Agent-generated; output verified`.
+
 ## Verification and honesty
 
 - **Verify before claiming.**
