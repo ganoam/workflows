@@ -55,6 +55,9 @@ DISPATCH = {
     'pretooluse-write': [
         'write-overwrite-guard.py',
     ],
+    'pretooluse-edit-write': [
+        'edit-approval-reminder.py',
+    ],
     'posttooluse-edit-write': [
         'devlog-backlog-reminder.py',
         'devlog-readme-check.py',

@@ -41,6 +41,16 @@
           "timeout": 10
         }
       ]
+    },
+    {
+      "matcher": "^(edit|write)$",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "for d in \"$DEVIN_PROJECT_DIR/deps/workflows\" \"$DEVIN_PROJECT_DIR\" \"$DEVIN_PROJECT_DIR/../workflows\" \"$HOME/workspaceconfig/deps/workflows\"; do [ -f \"$d/hooks/run-event.py\" ] && exec python3 \"$d/hooks/run-event.py\" pretooluse-edit-write; done",
+          "timeout": 10
+        }
+      ]
     }
   ],
   "PostToolUse": [
