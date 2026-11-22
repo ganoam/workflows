@@ -27,6 +27,9 @@ Entry style follows `devlog.md`; this recipe only defines the scan, grouping, an
    A repo skipped by the no-same-day rule but showing uncommitted changes still gets flagged, one trailing line naming it, so uncommitted-only work is not invisible.
    Uncommitted state feeds no DEVLOG fills: there are no commits to interpret.
 6. Every repo's `BACKLOG.md` is read and its open items mirrored into `~/code/notes/backlog.md`: `## <repo>` sections where a project has several items, flat `- <repo>: <summary>` lines for single-item projects.
+   Before writing the items, give each project a `last:` line summarizing its most recent work.
+   Order tracked files by mtime (`git ls-files` + `stat`, or `find` on the worktree), take the recently-touched cluster, and infer the work from the paths.
+   The DEVLOG may corroborate but is not the source.
    The file is regenerated wholesale on each run: per-project backlogs are the source of truth, so landed items disappear automatically and no manual pruning is needed.
    Deps get the same `<dep>` or `<repo>/deps/<dep>` naming as digest sections.
 7. Every `DEVLOG gap` found during the scan feeds back to the source repo: draft a DEVLOG entry from the uncovered commits and propose it to the user.
@@ -39,6 +42,7 @@ Entry style follows `devlog.md`; this recipe only defines the scan, grouping, an
 
 - `devlog.md` conventions apply: terse bullets, intent plus outcome, identifiers only where they carry meaning, no hashes or file lists.
 - Compress rather than copy: a reader skims the day, they do not re-read each log.
+- Each dated section opens with a one-liner summarizing all of the day's work across repos.
 - `owner:` marks in source entries are preserved as-is.
 - A repo's same-day `git log` is always checked against its DEVLOG coverage.
   Commits with no coverage, whether the day's section is missing entirely or just incomplete, get a `DEVLOG gap` marker followed by bullets summarizing what the log shows; intent is not invented.
@@ -51,6 +55,7 @@ Entry style follows `devlog.md`; this recipe only defines the scan, grouping, an
 ## Overall backlog
 
 `~/code/notes/backlog.md` is the cross-repo view of deferred work: every open item from every per-project `BACKLOG.md`, one line each as `- <repo>: <one-line summary>`.
+Each project carries a `last:` line before its items, a short summary of what was worked on most recently, inferred from file timestamps rather than the DEVLOG (which may lag or omit the work), so the file reads as state plus queue.
 It is a mirror, not a document of its own: per-project backlogs are the source of truth, so the file is regenerated wholesale on each digest run rather than maintained by hand.
 Items are grouped under `## <repo>` headings where several belong to one project; single-item projects can keep a flat list.
 There is no dating and no chronology: the file always shows what is open now, nothing else.
