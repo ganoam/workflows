@@ -62,7 +62,7 @@ Agent-facing summary: work happens on a private superset branch; `.gitprivate` d
 Never mix private and public paths in one prepared change.
 Never run the publisher, hooks installer, or any step that changes refs or pushes.
 Dry-run first when asked to preview.
-Tombstone entries stay in `.gitprivate` after private files are deleted, so historical commits stay classified correctly.
+Tombstone entries stay in `.gitprivate` after private files or directories are deleted, so historical commits stay classified correctly.
 
 ## Dependencies and submodules
 

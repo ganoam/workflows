@@ -11,12 +11,14 @@ Workflow for repos that are mostly public but carry private files (docs, notes, 
 ## .gitprivate
 
 `.gitprivate` (tracked on `private`, itself private) lists every private path, one per line, repo-root relative.
-Exact paths only, no globs.
+An entry naming a directory covers everything below it (gitignore-style): `notes` protects `notes/` and its whole subtree.
+Exact paths and directories only, no globs.
 Comments and blank lines allowed.
 
 - Entries guard **history**, not just the working tree.
-  Deleting a private file does NOT remove its entry: keep dead paths as tombstones so past commits still classify as private.
-- To add a new private file: list it in `.gitprivate` and commit `.gitprivate` first (hooks read the committed list), then commit the file.
+  Deleting a private path does NOT remove its entry: keep dead paths as tombstones so past commits still classify as private.
+  A tombstone entry also covers a later directory of the same name.
+- To add a new private file or directory: list it in `.gitprivate` and commit `.gitprivate` first (hooks read the committed list), then commit it.
   Or commit both with `--no-verify`.
 
 ## Commit discipline

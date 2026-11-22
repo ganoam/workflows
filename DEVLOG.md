@@ -153,3 +153,8 @@ Owner solo work on `main`, merged into `private`.
 - `agent-setup` rewritten for the new model: submodule demoted to optional fallback checkout, repo-type variants collapsed onto the uniform preamble, and the canonical consumer README entry added as a paste-in boilerplate.
 - `generate-skills` template and the 9 generated wrappers re-pointed at the checkout chain.
 - ROADMAP records the pivot with the superseded items struck through rather than deleted (owner's call: do not pretend this was always the plan).
+
+## 2026-11-22: git-privacy: directory entries
+
+- `recipes/git-privacy.md` documents that a `.gitprivate` entry naming a directory covers its whole subtree (gitignore-style), plus tombstone coverage of a later same-named directory; the `workflow.md` tombstone line now says files or directories.
+  Documents the matching change that landed in `deps/scripts` (`private_filter` in both hooks and `publish.sh`).
