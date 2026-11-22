@@ -44,8 +44,8 @@ Entry style follows `devlog.md`; this recipe only defines the scan, grouping, an
   Commits with no coverage, whether the day's section is missing entirely or just incomplete, get a `DEVLOG gap` marker followed by bullets summarizing what the log shows; intent is not invented.
 - Dates follow the work, not the run: DEVLOG-sourced bullets keep their section's date, gap-summary bullets take the commit's author date, and "same-day" for the log check is judged on that author date.
   Material belonging to another day is prefixed with its real date rather than silently absorbed into today's section.
-- `BACKLOG.md` is invisible to the digest (see `devlog.md`): never record that work was a queued backlog item, in `snippets.md`, `era-digest.md`, or the `snippet:` fills.
-  The overall `notes/backlog.md` is the exception: it exists to track open items, so mirroring them there is the point, not provenance in a chronology.
+- `BACKLOG.md` is invisible to all other documents (`rules.md` BACKLOG bullet): never record that work was a queued backlog item, in `snippets.md`, `era-digest.md`, or the `snippet:` fills.
+  The overall `notes/backlog.md` is the stated exception: it exists to track open items, so mirroring them there is the point, not provenance in a chronology.
 - `uncommitted:` bullets describe working state at scan time and carry no date prefix.
 
 ## Overall backlog

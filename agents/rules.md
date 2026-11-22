@@ -103,6 +103,8 @@ In a conflict, this file wins.
 - **Keep `BACKLOG.md` current where one exists.**
   Deferred work items, written by the user or at the user's request only.
   Your duty is maintenance, not authorship: when an item lands, propose its removal in the same task.
+  The file is invisible to all other documents: never name it or its contents in README, DEVLOG, digests, or any other document.
+  Exceptions are the binding layer that defines its duties (`rules.md`, `workflow.md`, `AGENTS.md`, recipes) and the overall notes backlog the snippet recipe maintains, which exists to mirror open items.
 - **Keep `README` accurate.**
   Structure, build, and workflow sections must reflect the current state of the repo.
 - **Human-targeted documents are written for humans**: README, DEVLOG, tricks, recipes.
