@@ -120,6 +120,8 @@ In a conflict, this file wins.
 - **Keep `README` accurate.**
   Structure, build, and workflow sections must reflect the current state of the repo.
   In a repo carrying `.gitprivate`, README never names or links a declared private path; after every README edit, check the file against the `.gitprivate` list.
+- **Keep `tricks/README.md` current where one exists.**
+  The index holds one terse row per tricks file; add or adjust the row in the same task that adds, renames, or retitles one.
 - **Human-targeted documents are written for humans**: README, DEVLOG, tricks, recipes.
   The content is still binding and relevant to agents, `tricks/` excepted: tricks are human reference, and the only agent duty there is suggesting new entries.
   `AGENTS.md` and `agents/*.md` are for agents.

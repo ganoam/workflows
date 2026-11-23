@@ -189,3 +189,9 @@ Owner solo work on `main`, merged into `private`.
 - `tricks/linux-tricks.md` created: general `/dev/pts` (pty slave nodes, per-userns devpts instances) and `/dev/shm` (POSIX shm as tmpfs files) entries.
 - `tricks/bwrap-tricks.md`: new sections record that `bwrap --dev` mounts a private devpts, so `--dev-bind-try /dev/pts /dev/pts` under `--unshare-user` shadows it with the host instance and breaks `/dev/ptmx` (`EACCES`, `out of pty devices`; verified bwrap 0.11.1), and why `--tmpfs /dev/shm` is in the line.
   The pts bind removed from the file's own sandbox block; consumer recipe + CI workflow get the same removal in `workspaceconfig`.
+
+## 2026-11-23: tricks index + upkeep duty
+
+- `tricks/README.md` created: index table, one terse row per tricks file with link; carries `Agent-maintained`.
+  A generated variant (per-file heading tables via an `update-docs.sh` modeled on `~/workspaceconfig`'s) was tried and reverted in-session: the heading-derived tables read too noisy to be useful.
+- Upkeep wired as a standing duty, row added or adjusted in the same task that adds, renames, or retitles a tricks file: injected `AGENTS.md` duties, `rules.md` upkeep, `workflow.md` tricks section; root README's `tricks/` layout line names the index.

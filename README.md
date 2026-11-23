@@ -17,6 +17,7 @@ Doubles as a Devin plugin (`skills/` + `.devin-plugin/`): the plugin provides di
 - `skills/`: one generated `SKILL.md` wrapper per recipe so agents discover them mechanically, plus the `generate-skills` generator.
   Thin pointers; the recipe file is the source of truth.
 - `tricks/`: terse command references: one heading per intent, a command block, a gotcha line only where something actually bit.
+  `tricks/README.md` indexes them, one row per file.
 - `ROADMAP.md`: the buildout plan and status.
 - `MAINTAINING.md`: how to maintain and extend the plugin.
 - `MdStyle.md`: prose style guide, binding via the `rules.md` pointer; rationale and detail for the doc-related style rules.

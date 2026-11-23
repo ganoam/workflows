@@ -28,6 +28,7 @@ In a repo carrying `.gitprivate`, README never names or links a declared private
 Non-obvious tool/command knowledge lives in the workflows repo under `tricks/` (e.g. `tricks/git-tricks.md`).
 Tricks are human reference, not binding on agents: the agent's duty is to suggest a new entry when a non-obvious trick is used or found; the owner decides.
 Style: one `## heading` per intent, the command block below, no lengthy explanations; a gotcha line only when something genuinely bit.
+`tricks/README.md` indexes the directory, one terse row per file; update the row in the same task that adds, renames, or retitles one.
 
 ## Documentation layering
 
