@@ -78,7 +78,7 @@ Commit the deletion of both.
 `hooks.json` at the plugin root registers lifecycle hooks wherever the plugin is installed.
 It carries no scripting: one entry per (event, matcher) group resolves `hooks/run-event.py` through a candidate-path chain (canonical `~/workspaceconfig/deps/workflows` first, then consumer `deps/workflows/`, dep-checkout sibling `../workflows`, this repo) and hands it a dispatch key.
 `run-event.py` holds the `DISPATCH` table mapping each key to its `hooks/*.py` scripts, feeds the event payload to each, and merges their outputs (first `decision` wins, `additionalContext` strings join).
-Adding a hook is a self-documenting script under `hooks/` (style: `deps/scripts/util/verify-format-diff.py`) plus one `DISPATCH` line — `hooks.json` stays untouched.
+Adding a hook is a self-documenting script under `hooks/` (style: `deps/scripts/bin/verify-format-diff.py`) plus one `DISPATCH` line — `hooks.json` stays untouched.
 A case-table test under `hooks/tests/` goes with it (`test-<hook>.py`, same interface: JSON payload on stdin, verdict off stdout, exit 1 on mismatch).
 The `id` in the table below is the script path; `run-event.py`'s table links it to its group.
 Plugin hooks are best-effort and fail open: `agents/rules.md` remains the guarantee, hooks are the reminder or backstop.
