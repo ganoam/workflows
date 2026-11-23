@@ -177,3 +177,9 @@ Owner solo work on `main`, merged into `private`.
   Same line wired through the injected `AGENTS.md` duty, the `rules.md` README bullet, and `workflow.md` (README section plus public/private summary); `agent-setup`'s onboarding privacy pass gained the audit for all public docs.
 - `recipes/git-privacy.md` gained "Public text stays silent": the check mechanics plus the generalization to any file that reaches `master`, doc text, links, and code comments included.
   A path that must appear in public text is not actually private.
+
+## 2026-11-23: em-dash hook: surrogate scoping
+
+- `hooks/em-dash-reminder.py` now also counts the spaced-`--` surrogate, scoped to where it reads as prose: whole lines in doc files (`.md`/`.rst`/`.adoc`/`.txt` and doc-named files), inside `#`/`//` comments elsewhere, so `--flag`, `x--`, and the `--` end-of-options marker stay silent.
+  Closes the blind spot that let `--` asides slip through edits today: `deps/scripts`' `bin/mdstyle-scan.py` treats `--` as a surrogate while the hook counted only unicode dashes.
+- `hooks/tests/test-em-dash-reminder.py`: case-table harness mirroring `test-git-state-guard.py` (21 cases), encoding the accepted false positives (doc-file code snippets, comment leaders inside string literals).
