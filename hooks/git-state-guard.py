@@ -60,8 +60,10 @@ RW = (r'(add|am|apply|bisect|checkout|cherry-pick|clean|clone|commit|'
 # Verbs whose read/write nature depends on the sub-command
 # (config is not here; its flags take a varying number of
 # arguments, so a fixed capture window cannot judge it).
+# The capture excludes shell separators: a plain \S+ would glue
+# a trailing `;` onto the token (`branch --list;` is a read).
 SUB = (r'(stash|branch|tag|remote|reflog|submodule|worktree)'
-       r'(?:\s+(\S+))?')
+       r'(?:\s+([^\s;&|()]+))?')
 
 # `config` gets its own match carrying the whole argument tail:
 # some of its flags take an argument and some take none, so the

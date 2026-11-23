@@ -80,6 +80,15 @@ CASES = [
     ('git reflog show', 'pass'),
     ('git submodule status', 'pass'),
     ('git worktree list', 'pass'),
+    # A shell separator abutting the sub-command must not glue
+    # onto the captured token (real bypass: `branch --list;`).
+    ('git -C repo branch --list; echo done', 'pass'),
+    ('git branch --list; echo x', 'pass'),
+    ('git branch --list&& echo x', 'pass'),
+    ('git stash list; git status', 'pass'),
+    ('git tag v1; echo done', 'block'),
+    ('git branch -d x; echo done', 'block'),
+    ('git commit -m x; echo done', 'block'),
     # config: reads pass, writes block, and a write cannot hide
     # behind flags that take arguments.
     ('git config', 'pass'),

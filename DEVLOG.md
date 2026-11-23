@@ -164,3 +164,9 @@ Owner solo work on `main`, merged into `private`.
 - `recipes/roadmap.md` upkeep gained the pivot rule: superseded items are struck through (`~~[x] ...~~`) and the new plan added with a dated line recording the pivot and its why; rewriting a checked item to match the new plan is out.
   Codifies what the consistency-model pivot did in this repo's ROADMAP; the injected `AGENTS.md` ROADMAP duty now points at it.
 - snippet: `tricks/bash-tricks.md` gained the `while IFS= read ... done << $var` trick; `tricks/git-tricks.md` gained branch rename / default-branch switch.
+
+## 2026-11-23: git-state-guard: separator-glued sub-commands
+
+- Fixed a false positive that blocked read-only git inside compound commands: `SUB`'s `\S+` capture glued a trailing shell separator onto the sub-command token, so `git -C repo branch --list;` judged the flag `--list;` and blocked.
+  The capture now excludes `;&|()`, matching the `config` tail's separator handling; write verbs stay blocked (`commit\b` bounds before `;`).
+- `hooks/tests/test-git-state-guard.py` gained regression cases: read forms with `;`/`&&` pass, write forms with separators still block.
