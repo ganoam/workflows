@@ -183,3 +183,9 @@ Owner solo work on `main`, merged into `private`.
 - `hooks/em-dash-reminder.py` now also counts the spaced-`--` surrogate, scoped to where it reads as prose: whole lines in doc files (`.md`/`.rst`/`.adoc`/`.txt` and doc-named files), inside `#`/`//` comments elsewhere, so `--flag`, `x--`, and the `--` end-of-options marker stay silent.
   Closes the blind spot that let `--` asides slip through edits today: `deps/scripts`' `bin/mdstyle-scan.py` treats `--` as a surrogate while the hook counted only unicode dashes.
 - `hooks/tests/test-em-dash-reminder.py`: case-table harness mirroring `test-git-state-guard.py` (21 cases), encoding the accepted false positives (doc-file code snippets, comment leaders inside string literals).
+
+## 2026-11-23: linux-tricks + bwrap devpts/shm entries
+
+- `tricks/linux-tricks.md` created: general `/dev/pts` (pty slave nodes, per-userns devpts instances) and `/dev/shm` (POSIX shm as tmpfs files) entries.
+- `tricks/bwrap-tricks.md`: new sections record that `bwrap --dev` mounts a private devpts, so `--dev-bind-try /dev/pts /dev/pts` under `--unshare-user` shadows it with the host instance and breaks `/dev/ptmx` (`EACCES`, `out of pty devices`; verified bwrap 0.11.1), and why `--tmpfs /dev/shm` is in the line.
+  The pts bind removed from the file's own sandbox block; consumer recipe + CI workflow get the same removal in `workspaceconfig`.

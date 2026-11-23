@@ -14,7 +14,6 @@ bwrap \
   --unshare-user --uid 0 --gid 0 \
   --bind rootfs / \
   --dev /dev --proc /proc --tmpfs /dev/shm \
-  --dev-bind-try /dev/pts /dev/pts \
   --ro-bind /etc/resolv.conf /etc/resolv.conf \
   --ro-bind ~/myrepo /mnt/hostrepo \
   --clearenv \
@@ -27,6 +26,17 @@ bwrap \
 - `--unshare-user` gives a fake uid 0 inside (mapped to your real uid outside).
 - Network is shared unless you `--unshare-net`: binding the host `resolv.conf`/`hosts` makes apt/git work.
 - `--clearenv` + `--setenv` prevents host env leaking in (a stray exported `CONFIGROOT` broke an entire test run once, sanitize).
+
+## /dev/pts: `--dev` already mounts a private devpts; do not bind the host's
+
+`bwrap --dev` mounts a fresh devpts at `/dev/pts` (contains `ptmx`); pty allocation works out of the box.
+`--dev-bind-try /dev/pts /dev/pts` under `--unshare-user` shadows it with the host instance, which belongs to the host userns: `/dev/ptmx` fails `EACCES`, `pty.openpty()` reports `out of pty devices` (verified bwrap 0.11.1).
+Only bind it when the sandbox shares the host userns.
+
+## /dev/shm: why `--tmpfs /dev/shm` is in the sandbox line
+
+`--dev` leaves `/dev/shm` an empty dir inside the `/dev` tmpfs, not a real mount.
+POSIX shm clients (chromium/QtWebEngine renderer IPC, some audio/dbus users) statfs or size-check it; the tmpfs gives them a real mount.
 
 ## apt inside a userns: `_apt` sandbox fails
 
