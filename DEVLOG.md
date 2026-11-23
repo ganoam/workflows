@@ -170,3 +170,10 @@ Owner solo work on `main`, merged into `private`.
 - Fixed a false positive that blocked read-only git inside compound commands: `SUB`'s `\S+` capture glued a trailing shell separator onto the sub-command token, so `git -C repo branch --list;` judged the flag `--list;` and blocked.
   The capture now excludes `;&|()`, matching the `config` tail's separator handling; write verbs stay blocked (`commit\b` bounds before `;`).
 - `hooks/tests/test-git-state-guard.py` gained regression cases: read forms with `;`/`&&` pass, write forms with separators still block.
+
+## 2026-11-23: README silence check for .gitprivate paths
+
+- New rule and standing duty: in a repo carrying `.gitprivate`, README never names or links a declared private path, and every README edit is followed by a check of the file against the list.
+  Same line wired through the injected `AGENTS.md` duty, the `rules.md` README bullet, and `workflow.md` (README section plus public/private summary); `agent-setup`'s onboarding privacy pass gained the audit for all public docs.
+- `recipes/git-privacy.md` gained "Public text stays silent": the check mechanics plus the generalization to any file that reaches `master`, doc text, links, and code comments included.
+  A path that must appear in public text is not actually private.

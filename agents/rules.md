@@ -119,6 +119,7 @@ In a conflict, this file wins.
   Exceptions are the binding layer that defines its duties (`rules.md`, `workflow.md`, `AGENTS.md`, recipes) and the overall notes backlog the snippet recipe maintains, which exists to mirror open items.
 - **Keep `README` accurate.**
   Structure, build, and workflow sections must reflect the current state of the repo.
+  In a repo carrying `.gitprivate`, README never names or links a declared private path; after every README edit, check the file against the `.gitprivate` list.
 - **Human-targeted documents are written for humans**: README, DEVLOG, tricks, recipes.
   The content is still binding and relevant to agents, `tricks/` excepted: tricks are human reference, and the only agent duty there is suggesting new entries.
   `AGENTS.md` and `agents/*.md` are for agents.

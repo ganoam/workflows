@@ -21,6 +21,7 @@ Do not infer intent.
 README is "what is true now and why," for an outside reader.
 Update it whenever work changes: file-structure tables, getting-started commands, stated capabilities, architectural decisions, and binding conventions.
 Record the decision and its rationale, not just the outcome.
+In a repo carrying `.gitprivate`, README never names or links a declared private path; check the file against the list after every edit.
 
 ## Tool tricks
 
@@ -60,6 +61,7 @@ A recipe may restrict what `rules.md` allows; it may never permit what `rules.md
 Full procedure lives in `recipes/git-privacy.md`.
 Agent-facing summary: work happens on a private superset branch; `.gitprivate` declares private paths; a publish script replays public commits onto the public branch.
 Never mix private and public paths in one prepared change.
+A file that reaches the public branch never names a `.gitprivate` path; after every README or public-doc edit, check the file against the list.
 Never run the publisher, hooks installer, or any step that changes refs or pushes.
 Dry-run first when asked to preview.
 Tombstone entries stay in `.gitprivate` after private files or directories are deleted, so historical commits stay classified correctly.

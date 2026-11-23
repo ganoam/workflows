@@ -60,6 +60,7 @@ And **preserve existing local content**: an `AGENTS.md` that already exists hold
      Show the owner a diff before rewriting the file.
 4. **Privacy.**
    If the repo has `.gitprivate` or uses a public/private split: follow `git-privacy.md`, check the `.gitprivate` list covers the files this setup adds (AGENTS.md is commonly private; the plugin docs are public).
+   While here, check README and the other public docs against the list too: no private path may be named (`git-privacy.md`, "Public text stays silent").
    Hand the owner the hooks command: `deps/scripts/git-util/setup-git-hooks.sh` (needs the `deps/scripts` submodule, another submodule command to hand over if absent).
 5. **Local skills.**
    If the repo has a `recipes/` directory, follow the `generate-skills` procedure to emit `.devin/skills/<name>/` wrappers.

@@ -27,6 +27,12 @@ A commit must never mix private and public files.
 The pre-commit hook enforces this on both branches (on `master`: any `.gitprivate` file staged; on `private`: a staged set containing both).
 Split violations into two commits.
 
+## Public text stays silent
+
+A file that reaches `master` never names a `.gitprivate` path: naming one leaks what the list exists to hide.
+After every edit to a public file, README above all, check the file against `.gitprivate`: grep each entry against it, by eye on a short list.
+Doc text, links, and code comments count alike; a path that must appear in public text is not actually private.
+
 ## publish.sh
 
 `git-util/publish.sh` replays not-yet-published public commits from `private` onto `master`:
