@@ -52,10 +52,13 @@ import sys
 # any mix of global options and their values before the verb.
 G = r'(?:^|[;&|(]+\s*)git(?:\s+(?:-{1,2}[\w-]+(?:=\S+)?)(?:\s+\S+)?)*\s+'
 
-# Verbs that always mutate repo state or refs.
+# Verbs that always mutate repo state or refs. Verb names continue
+# through `-`, so a plain \b lets `merge` swallow `merge-base` (a
+# real FP): the lookahead excludes a following hyphen, and the
+# index-writing merge plumbing is listed in full to keep it blocked.
 RW = (r'(add|am|apply|bisect|checkout|cherry-pick|clean|clone|commit|'
-      r'fetch|init|merge|mv|pull|push|rebase|reset|restore|revert|rm|'
-      r'switch|update-index)\b')
+      r'fetch|init|merge|merge-index|merge-one-file|mv|pull|push|'
+      r'rebase|reset|restore|revert|rm|switch|update-index)(?![-\w])')
 
 # Verbs whose read/write nature depends on the sub-command
 # (config is not here; its flags take a varying number of

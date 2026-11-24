@@ -195,3 +195,4 @@ Owner solo work on `main`, merged into `private`.
 - `tricks/README.md` created: index table, one terse row per tricks file with link; carries `Agent-maintained`.
   A generated variant (per-file heading tables via an `update-docs.sh` modeled on `~/workspaceconfig`'s) was tried and reverted in-session: the heading-derived tables read too noisy to be useful.
 - Upkeep wired as a standing duty, row added or adjusted in the same task that adds, renames, or retitles a tricks file: injected `AGENTS.md` duties, `rules.md` upkeep, `workflow.md` tricks section; root README's `tricks/` layout line names the index.
+- snippet: `MAINTAINING.md` minor upkeep.

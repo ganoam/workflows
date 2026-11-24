@@ -50,6 +50,8 @@ CASES = [
     ('git fetch', 'block'),
     ('git pull', 'block'),
     ('git merge b', 'block'),
+    ('git merge-index x', 'block'),
+    ('git merge-one-file x', 'block'),
     ('git clone u', 'block'),
     ('git init', 'block'),
     ('git submodule update', 'block'),
@@ -76,6 +78,11 @@ CASES = [
     ('git tag -l', 'pass'),
     ('git remote -v', 'pass'),
     ('git remote show o', 'pass'),
+    # Hyphenated read-only verbs must not match a mutating prefix
+    # (real FP: `git merge-base` read as `merge`).
+    ('git merge-base --is-ancestor a b', 'pass'),
+    ('git merge-tree a b c', 'pass'),
+    ('cd r && git merge-base --is-ancestor a b && echo x || echo y', 'pass'),
     ('git reflog', 'pass'),
     ('git reflog show', 'pass'),
     ('git submodule status', 'pass'),
