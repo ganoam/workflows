@@ -1,9 +1,6 @@
 # Recipes index
 
-Agent-maintained.
-One row per recipe file in this directory; update the row in the same task that adds, renames, or retitles one.
-Coverage is checked at session start by the plugin's skills-drift hook.
-Below the index: everything a recipe author needs to know.
+Agent-maintained; human reviewed.
 
 | File | Contents |
 |---|---|
