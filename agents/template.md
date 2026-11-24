@@ -21,7 +21,7 @@ Keep it byte-identical so drift is a string compare; it is identical for all rep
 
 ## Reusable workflows
 
-`~/workspaceconfig/deps/workflows/recipes/` documents reusable detailed workflows; a project-local `recipes/` directory, if present, layers on top and overrides.
+`deps/workflows/recipes/` documents reusable detailed workflows (resolved through the preamble checkout chain); a project-local `recipes/` directory, if present, layers on top and overrides.
 When a task falls under one, read and follow it.
 
 Project-local recipes here: <list or "none yet">

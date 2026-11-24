@@ -205,3 +205,9 @@ Owner solo work on `main`, merged into `private`.
   `update-ref` was the real bypass: paired with `commit-tree` it forms a complete commit path around the guard.
 - Policy recorded as `pass` cases: object writes without ref/index moves stay allowed (`write-tree`, `commit-tree`, `merge-tree --write-tree`); `hash-object -w`/`mktag` stay uncovered until someone wants the flag-aware handling.
 - `hooks/tests/test-git-state-guard.py`: 72 -> 98 cases, the reported `merge-base && echo || echo` shape included.
+
+## 2026-11-24: dep-path resolution convention
+
+- `workflow.md`'s deps section now states it: `deps/workflows/...` references in repo docs name the workflows checkout resolved through the chain (canonical first), while `deps/<tool>` references (`deps/scripts/...`) stay literal because they name the repo's pinned tooling version.
+  Consumer `AGENTS.md` bodies written pre-pivot are correct by convention instead of needing path rewrites.
+- `template.md`'s recipes boilerplate back to the chain-neutral `deps/workflows/...` spelling: a literal `~/` path is wrong in any AGENTS.md read off-machine.

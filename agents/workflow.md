@@ -71,6 +71,8 @@ Tombstone entries stay in `.gitprivate` after private files or directories are d
 
 Shared code and docs live in dependency repos checked out under `deps/`.
 For reading workflow documents, `~/workspaceconfig/deps/workflows` is the single canonical checkout on a machine; `deps/workflows` in the working repo and `../workflows` are fallbacks, and absent all three the agent warns and prompts to clone.
+Doc references written as `deps/workflows/...` in repo docs name the workflows checkout resolved through this chain, not the literal submodule path.
+`deps/<tool>` references (`deps/scripts/...`) stay literal: they name the repo's pinned dep, the version its hooks and tooling actually run.
 For changing them, the remote repository is canonical; no checkout is superior.
 Workflow-doc edits happen in the canonical checkout, not in a consumer's `deps/workflows` clone.
 Edit only the working repo's own dependency clone.
