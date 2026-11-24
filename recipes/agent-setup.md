@@ -42,7 +42,7 @@ The git-URL form (`devin plugins install ganoam/workflows`) is not recommended: 
 
 4. If the repo uses the public/private workflow: `.gitprivate`, hooks via `deps/scripts/git-util/setup-git-hooks.sh` (see `git-privacy.md`).
 5. If the repo has its own `recipes/` directory: run `/workflows:generate-skills` once to generate `.devin/skills/` wrappers.
-   Re-run when local recipes change.
+   Afterwards a session-start duty keeps them in sync (`workflow.md`, plugin `AGENTS.md`); no manual re-run is needed.
 
 ## Agent procedure: onboarding a consumer repo
 

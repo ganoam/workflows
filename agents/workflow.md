@@ -49,6 +49,8 @@ A recipe may restrict what `rules.md` allows; it may never permit what `rules.md
   Deferred work items; entries are written by the owner or at the owner's request, and the agent maintains the file: started-but-uncommitted work moves an item into `## In flight`, and removal is proposed in the same task that commits it.
 - `AGENTS.md`: project-local.
   Conventions and instructions for agents.
+- `.devin/skills/`: project-local.
+  Generated SKILL.md wrappers, one per `recipes/` file; regenerated mechanically, never hand-edited.
 - `recipes/` in this repo (shared across projects): reusable detailed workflows (see `git-privacy.md`)
 - `tricks/`: in this repo (shared across projects): terse command recipes
 - `agents/rules.md`: in this repo (shared across projects): binding rules for agents.
@@ -123,6 +125,7 @@ Deliverables that need external action (reports, application materials, upstream
 ## Session lifecycle
 
 At session start or when resuming: read AGENTS.md and DEVLOG.md, check `git log` and `git status` for solo work since the last entry.
+Where the repo has `recipes/`, check `.devin/skills/` for drift (missing, stale, or orphaned generated wrappers) and propose regeneration per the `generate-skills` procedure; where the plugin is installed its session-start hook computes the drift.
 During work: update docs as conventions emerge, not at the end.
 At session end: DEVLOG entry prepared alongside the work it chronicles, AGENTS.md current if conventions changed, BACKLOG.md current (in-progress items in `## In flight`, landed items pruned), README accurate, no leftover scratch state.
 

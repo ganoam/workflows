@@ -68,6 +68,7 @@ DISPATCH = {
     'sessionstart': [
         'session-start-reminder.py',
         'preamble-drift-check.py',
+        'skills-drift-check.py',
     ],
     'stop': [
         'session-end-reminder.py',

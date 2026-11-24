@@ -24,8 +24,9 @@ unfamiliar work, so a reminder is the right level.
   context benefits from the reminder).
 - The checklist names duties, not paths: which checkout holds the
   binding docs is resolved by AGENTS.md itself.
-- The preamble-sync duty is not listed: preamble-drift-check.py
-  performs that compare itself at the same event.
+- The preamble-sync and skills-sync duties are not listed:
+  preamble-drift-check.py and skills-drift-check.py perform those
+  compares themselves at the same event.
 
 Usage: invoked by hooks.json (SessionStart, no matcher); stdin is
 the hook event JSON.

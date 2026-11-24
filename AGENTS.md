@@ -26,6 +26,8 @@ Standing duties in every repo:
   Prepare the entry, and any README update the work calls for, alongside the work so they commit together.
 - Keep `BACKLOG.md` current where one exists: entries are written by the user or at the user's request only; your duty is maintenance, moving started-but-uncommitted items into `## In flight` and proposing removal in the same task that lands them.
 - Keep `tricks/README.md` current where one exists: one terse index row per file, added or adjusted in the same task that adds, renames, or retitles a tricks file.
+- Keep `.devin/skills/` in sync with the repo's `recipes/` where one exists: one generated wrapper per recipe file, `description` matching the recipe's first intro sentence; refresh or prune in the same task that adds, renames, retitles, or edits a recipe.
+  Drift is computed at session start by the plugin's `skills-drift-check` hook where installed.
 - Suggest new shared `recipes/` and `tricks/` when you notice a repeated procedure or non-obvious tool knowledge worth keeping: propose the entry, the owner decides.
 
 Human-facing docs (`README.md`, `DEVLOG.md`, `recipes/`, `tricks/`) are written for humans; their content still binds you, `tricks/` excepted (reference only, your duty is suggesting new entries).
