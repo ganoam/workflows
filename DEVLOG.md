@@ -233,3 +233,22 @@ Owner solo work on `main`, merged into `private`.
 - The rework fixed two real gaps in the check: `README.md` is no longer scanned as a recipe, and the workflows repo itself resolves wrappers at `skills/` rather than `.devin/skills/` (it would have flagged every shared recipe otherwise).
   `generate-skills` SKILL.md documents the `README.md` exclusion; `MAINTAINING.md` add/remove tasks and hooks table updated; test table now 17 cases, all pass.
 - First live run on this repo verified the design: it flagged a real bug (a `generated: true` line inside `generate-skills`' body example marked the file generated: frontmatter parsing now scopes to the leading `---` block) plus two genuinely stale wrappers; `git-privacy` and `roadmap` descriptions regenerated.
+
+## 2026-11-24: git-privacy recipe: applied-detection fix
+
+- `recipes/git-privacy.md` synced to `publish.sh`'s new applied detection (in the scripts repo): `git cherry` replaced by patch-id matching over all of the public branch, so published copies merged back into `private` are still recognized.
+
+## 2026-11-24: git-privacy recipe: era classification
+
+- `recipes/git-privacy.md` synced to `publish.sh`'s era classification (in the scripts repo): each commit is judged by its era's `.gitprivate` unioned with every later version, so removing the boundary no longer leaks a graduated file's private-era commits.
+
+## 2026-11-24: bash-tricks: mapfile + declare -A
+
+- `tricks/bash-tricks.md`: entries for `mapfile -t arr < <(cmd)` (line-per-element reads without word-split/glob, subshell-free vs piped mapfile) and `declare -A` (associative-array gotchas: indexed-array fallback, `set -u` missing-key death, implicit `local`, key count/list); both lifted from `publish.sh`'s era walk.
+- `tricks/README.md`: row updated.
+
+## 2026-11-24: destructive-cmd-guard covers appends
+
+- `hooks/destructive-cmd-guard.py`: `>>` redirections and `tee -a` onto existing files now block, closing the carve-out that let `cat >> DEVLOG.md` bypass the edit-tool approval the rules require (first hit in the wild: DEVLOG appends via heredoc).
+  The redirection check now stats truncate AND append targets alike; creation (target absent) still passes, as do `/tmp` commands.
+- `MAINTAINING.md`: hooks table wording synced.
