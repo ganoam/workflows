@@ -11,7 +11,7 @@ Workflow for repos that are mostly public but carry private files (docs, notes, 
 ## .gitprivate
 
 `.gitprivate` (tracked on `private`, itself private) lists every private path, one per line, repo-root relative.
-An entry naming a directory covers everything below it (gitignore-style): `notes` protects `notes/` and its whole subtree.
+An entry naming a directory covers everything below it (gitignore-style): `notes` protects `notes/` and its whole subtree; a trailing slash (`notes/`) is equivalent.
 Exact paths and directories only, no globs.
 Comments and blank lines allowed.
 
@@ -43,6 +43,7 @@ Doc text, links, and code comments count alike; a path that must appear in publi
   Each commit's files are classified against the union of its era's `.gitprivate` and every later version on the range: a path private at commit time, or made private afterwards, never publishes.
 - Private-only commits are skipped.
   A commit mixing private and public files aborts the run: split it and re-run.
+- Entries leaving the era set mark graduations: at the unlist commit's position the run synthesizes one `master` commit carrying those paths' state at that commit (`[git-privacy] publish <paths> from private`), so later picks diff on state `master` actually has rather than on state only `private` saw.
 - Picks are cherry-picked onto `master` in a temporary worktree, so the checkout never moves.
   On conflict it stops and prints how to resolve in the worktree.
 
@@ -53,10 +54,10 @@ The boundary tag is local; `git push <private-remote> publish-base` keeps it bac
 
 When a private file should become public from now on (its past stays private):
 
-1. Add it to `master` directly: `git show private:<path> > <path>` in a master worktree, commit, push.
-2. Remove `<path>` from `.gitprivate`, commit on `private` (private commit).
-3. Done.
-   Commits before `publish-base` are never re-examined, so old commits touching the file stay private; new commits touching it are public and publish normally.
+1. Remove `<path>` from `.gitprivate`, commit on `private` (private commit).
+2. `publish.sh` does the rest: at the unlist commit it synthesizes one `master` commit carrying the path's state at that point; earlier commits stay private, later commits replay on top of it.
+
+Planting the file on `master` by hand first (`git show private:<path>`) is harmless: the synthesized commit sees identical state and skips itself.
 
 ## Removing the boundary
 

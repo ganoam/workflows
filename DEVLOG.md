@@ -252,3 +252,9 @@ Owner solo work on `main`, merged into `private`.
 - `hooks/destructive-cmd-guard.py`: `>>` redirections and `tee -a` onto existing files now block, closing the carve-out that let `cat >> DEVLOG.md` bypass the edit-tool approval the rules require (first hit in the wild: DEVLOG appends via heredoc).
   The redirection check now stats truncate AND append targets alike; creation (target absent) still passes, as do `/tmp` commands.
 - `MAINTAINING.md`: hooks table wording synced.
+
+## 2026-11-24: git-privacy recipe: graduation plants + trailing-slash entries
+
+- `recipes/git-privacy.md`: doc sync for `publish.sh` changes in the scripts repo (separate commit there).
+  Graduation is now fully automatic: removing a `.gitprivate` entry makes the run synthesize one public-branch commit carrying the path's state at the unlist commit, so later picks diff on state the public side has; the manual `git show private:<path>` plant step retired to a harmless no-op note.
+  `.gitprivate` format bullet notes trailing slashes are equivalent to bare paths (normalized at read time in publish.sh and both hooks).
