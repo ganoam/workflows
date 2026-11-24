@@ -17,6 +17,7 @@ The recipe file stays the single source of truth; the wrapper adds only the disc
 - Shared recipes: `~/workspaceconfig/deps/workflows/recipes/*.md` (canonical), falling back to `deps/workflows/recipes/` in the working repo, or `recipes/*.md` when run inside the workflows repo itself.
 - Project-local recipes: `recipes/*.md` in the working repo.
   A local recipe with the same basename wins over the shared one.
+- `recipes/README.md` is the index and writer's guide, never a recipe: it gets no wrapper in either recipes directory.
 
 ## Output
 

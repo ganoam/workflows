@@ -28,6 +28,7 @@ Standing duties in every repo:
 - Keep `tricks/README.md` current where one exists: one terse index row per file, added or adjusted in the same task that adds, renames, or retitles a tricks file.
 - Keep `.devin/skills/` in sync with the repo's `recipes/` where one exists: one generated wrapper per recipe file, `description` matching the recipe's first intro sentence; refresh or prune in the same task that adds, renames, retitles, or edits a recipe.
   Drift is computed at session start by the plugin's `skills-drift-check` hook where installed.
+- Keep `recipes/README.md` current where one exists (shared or repo-local): one index row per recipe file, updated in the same task that adds, renames, or retitles one; coverage is checked at session start.
 - Suggest new shared `recipes/` and `tricks/` when you notice a repeated procedure or non-obvious tool knowledge worth keeping: propose the entry, the owner decides.
 
 Human-facing docs (`README.md`, `DEVLOG.md`, `recipes/`, `tricks/`) are written for humans; their content still binds you, `tricks/` excepted (reference only, your duty is suggesting new entries).

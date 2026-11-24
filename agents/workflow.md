@@ -125,7 +125,8 @@ Deliverables that need external action (reports, application materials, upstream
 ## Session lifecycle
 
 At session start or when resuming: read AGENTS.md and DEVLOG.md, check `git log` and `git status` for solo work since the last entry.
-Where the repo has `recipes/`, check `.devin/skills/` for drift (missing, stale, or orphaned generated wrappers) and propose regeneration per the `generate-skills` procedure; where the plugin is installed its session-start hook computes the drift.
+Where the repo has `recipes/`, check `.devin/skills/` for drift (missing, stale, or orphaned generated wrappers) and propose regeneration per the `generate-skills` procedure; where `recipes/README.md` exists, check its index rows cover the recipe files.
+Where the plugin is installed, the session-start hook computes both drifts.
 During work: update docs as conventions emerge, not at the end.
 At session end: DEVLOG entry prepared alongside the work it chronicles, AGENTS.md current if conventions changed, BACKLOG.md current (in-progress items in `## In flight`, landed items pruned), README accurate, no leftover scratch state.
 

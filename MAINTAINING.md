@@ -46,7 +46,8 @@ The discovery layer (`skills/`) is thin generated wrappers over `recipes/`: the 
 
 1. Write `recipes/<name>.md`: human prose, intro first sentence states when to apply it (it becomes the skill trigger).
 2. Run `/workflows:generate-skills` in a consumer repo, or hand-write `skills/<name>/SKILL.md` matching the generated format.
-3. Commit both files in this repo; bump the plugin version in `plugin.json` if desired.
+3. Add the `recipes/README.md` index row.
+4. Commit all three files in this repo; bump the plugin version in `plugin.json` if desired.
 
 ### Edit a recipe
 
@@ -71,7 +72,7 @@ Follow `recipes/agent-setup.md`: submodule this repo to `deps/workflows`, write 
 ### Remove a recipe
 
 Delete `recipes/<name>.md`; `generate-skills` prunes the generated wrapper.
-Commit the deletion of both.
+Drop its `recipes/README.md` index row; commit the deletion of all three.
 
 ## Hooks
 
@@ -94,8 +95,9 @@ Plugin hooks are best-effort and fail open: `agents/rules.md` remains the guaran
 | `hooks/write-overwrite-guard.py` | `PreToolUse` | `^write$` | `rules.md` edits-never-rewrites rule | Blocks `write` when the target file exists; the change goes through `edit` or the user applies the rewrite. |
 | `hooks/edit-approval-reminder.py` | `PreToolUse` | `^(edit\|write)$` | `rules.md` edit-approval rule | Injects the approval rule on every edit/write call; a reminder, not a gate: approval status is conversation state the payload cannot carry, so no mechanical verdict exists. |
 | `hooks/em-dash-reminder.py` | `PostToolUse` | `^(edit\|write)$` | `MdStyle.md` no-em-dashes | Counts unicode dashes in the applied edit/write text and injects the rule + allowed replacements; a reminder, not a gate (justified deviations permitted). |
-| `hooks/session-start-reminder.py` | `SessionStart` | none | `workflow.md` session-start duties | Injects the session-start checklist: re-read binding docs, read repo `AGENTS.md`/`DEVLOG.md`, check `git status`/`git log` for unfamiliar work. Re-fires on resume/clear by design. The preamble-sync duty is deliberately not listed: `preamble-drift-check.py` performs that compare. |
+| `hooks/session-start-reminder.py` | `SessionStart` | none | `workflow.md` session-start duties | Injects the session-start checklist: re-read binding docs, read repo `AGENTS.md`/`DEVLOG.md`, check `git status`/`git log` for unfamiliar work. Re-fires on resume/clear by design. The preamble-sync and skills-sync duties are deliberately not listed: `preamble-drift-check.py` and `skills-drift-check.py` perform those compares. |
 | `hooks/preamble-drift-check.py` | `SessionStart` | none | `rules.md` preamble-sync duty | Performs the compare the duty asks for: repo `AGENTS.md` preamble vs the `<Canonical preamble:` block in `agents/template.md`, pointer paths masked; injects a drift verdict only when they differ. Files without the canonical opener are out of scope (exempts this repo's own plugin AGENTS.md). |
+| `hooks/skills-drift-check.py` | `SessionStart` | none | skills-sync + `recipes/README.md` index duties | Compares `recipes/*.md` (minus `README.md`, the index) to generated wrappers (`.devin/skills/` in consumers, `skills/` in this repo); injects a proposal on missing, stale-description, or orphaned wrappers, and on uncovered or dead index rows where a `recipes/README.md` exists. Hand-authored wrappers skipped; silent where no `recipes/` exists. |
 | `hooks/session-end-reminder.py` | `Stop` | none | `workflow.md` session-end duties | Injects a conditional session-end check: DEVLOG entry prepared alongside the work for a shared commit, AGENTS/README/ROADMAP currency, BACKLOG maintenance (`## In flight` staging plus pruning landed items). Never blocks (block-on-Stop can loop); fires on mid-session pauses too, so the check is phrased conditionally. |
 
 ## Gotchas
