@@ -79,3 +79,27 @@ done <<< "$var"
 - `IFS=` stops `read` stripping leading/trailing whitespace, `-r` keeps backslashes literal: both needed for paths.
 - Prefer this over `echo "$var" | while read`: a piped `while` runs in a subshell and any state set inside the loop body dies with it; `<<<` keeps the loop in the current shell.
 - `read` returns non-zero on a final line without a newline, but still fills `line`: input built by `printf` or command substitution always ends in newline, so no edge case here.
+
+## Read command output into an array: `mapfile -t arr < <(cmd)`
+
+```bash
+mapfile -t scan < <(git rev-list --topo-order "$base..private")
+```
+
+- One element per INPUT LINE, so output containing spaces, `*`, `?` survives; `arr=($(cmd))` splits on any whitespace and glob-expands, both wrong for paths.
+- `-t` strips each element's trailing newline (default keeps them).
+- `< <(cmd)` (process substitution) feeds the command's output without a pipe: `cmd | mapfile` runs mapfile in a subshell and `arr` dies with it, same trap as piped `while`.
+- Index access (`${scan[$i]}`, `${#scan[@]}`) is what makes forward/backward walks cheap; `for x in "${scan[@]}"` iterates in stored order.
+
+## Key-value lookups: `declare -A map` (associative arrays)
+
+```bash
+declare -A applied
+while read pid _; do applied[$pid]=1; done < <(git log -p master | git patch-id)
+[ "${applied[$pid]:-}" = 1 ] && echo seen
+```
+
+- Without `declare -A`, `map[$k]=v` builds an INDEXED array: a string subscript is evaluated as arithmetic, so `map[sha]=1` sets element 0 (or errors on non-identifier keys).
+- Lookup a maybe-missing key as `${map[$k]:-}`: under `set -u` a bare `${map[$k]}` on an absent key dies "unbound variable"; `:-` is also just shorter than an `if [ -v ]` guard.
+- Inside a function, `declare -A` is implicitly `local`: add `-g` when the map must survive return.
+- `declare -A a b c` declares several maps at once; `${#map[@]}` is the key count, `"${!map[@]}"` the key list.

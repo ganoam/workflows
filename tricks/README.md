@@ -5,7 +5,7 @@ One row per file in this directory; update the row in the same task that adds, r
 
 | File | Contents |
 |---|---|
-| [bash-tricks.md](bash-tricks.md) | bootstrap-script bug patterns: `popd` masking, `((x++))` falsy, subshells, `set -u`, herestring loops |
+| [bash-tricks.md](bash-tricks.md) | bootstrap-script bug patterns: `popd` masking, `((x++))` falsy, subshells, `set -u`, herestring loops, `mapfile` arrays, `declare -A` maps |
 | [bwrap-tricks.md](bwrap-tricks.md) | minimal Ubuntu sandbox; private devpts under `--dev`, `/dev/shm`, userns apt, fake-root tar |
 | [fusesoc-tricks.md](fusesoc-tricks.md) | virtual cores and providers, resolver error order, `gen_flist` scope |
 | [git-tricks.md](git-tricks.md) | submodule add/remove/sparse, filter-repo merges, worktrees, branch rename |
