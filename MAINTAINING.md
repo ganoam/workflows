@@ -85,7 +85,7 @@ Plugin hooks are best-effort and fail open: `agents/rules.md` remains the guaran
 
 | id | event | matcher | enforces | behavior |
 |---|---|---|---|---|
-| `hooks/git-state-guard.py` | `PreToolUse` | `^exec$` | `rules.md` repo-state and ref rules | Blocks state-changing `git` verbs; read-only forms and `/tmp` commands pass. `config` scope flags shift the judgment to the key/value pair, so scoped writes block while scoped reads pass. |
+| `hooks/git-state-guard.py` | `PreToolUse` | `^exec$` | `rules.md` repo-state and ref rules | Blocks state-changing `git` verbs, ref/index plumbing, and history/storage rewrites; read-only forms and `/tmp` commands pass. `config` and `symbolic-ref` argument tails are walked, so writes past the flag/refname prefix block while read forms pass. |
 | `hooks/devlog-backlog-reminder.py` | `PostToolUse` | `^(edit\|write)$` | `rules.md` BACKLOG duty | On `DEVLOG.md` edits, injects a reminder to prune landed (committed) backlog items. |
 | `hooks/devlog-readme-check.py` | `PostToolUse` | `^(edit\|write)$` | `AGENTS.md` README-accuracy duty | On `DEVLOG.md` edits, injects a conditional check: logged work that changed what README documents gets a same-task update proposal. A reminder, not a semantic verdict. |
 | `hooks/devlog-roadmap-check.py` | `PostToolUse` | `^(edit\|write)$` | `AGENTS.md` ROADMAP-currency duty | On `DEVLOG.md` edits, injects a conditional check: logged work that landed a roadmap item gets checked off or re-statused in the same task. Silent where no ROADMAP exists (the duty itself is conditional). |

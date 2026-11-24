@@ -13,14 +13,21 @@ rule mechanical instead of recall-based.
 == Method ==
 
 Reads the hook event JSON on stdin, extracts `tool_input.command`,
-and scans it for git invocations. Two checks:
+and scans it for git invocations. Three checks:
 
-  1. Directly mutating verbs (RW list: commit, push, checkout,
-     fetch, pull, reset, merge, clone, ...).
-  2. Sub-command verbs (SUB list): stash/branch/tag/remote/config/
-     reflog/submodule/worktree, judged per sub-command against a
-     read-only allow-list (e.g. `stash list` passes, `stash` writes
-     are blocked; `branch -v` passes, `branch foo` is blocked).
+  1. Directly mutating verbs (RW list): commit, push, checkout,
+     fetch, pull, reset, merge, clone, ... plus ref/index plumbing
+     (update-ref, read-tree, pack-refs), storage rewrites
+     (gc, prune, repack), history rewrites (filter-branch,
+     filter-repo).
+  2. Sub-command verbs (SUB list): stash/branch/tag/remote/
+     reflog/submodule/worktree/notes/replace, judged per
+     sub-command against a read-only allow-list (e.g. `stash
+     list` passes, `stash` writes are blocked; `branch -v`
+     passes, `branch foo` is blocked).
+  3. Tail-walked verbs: `config` and `symbolic-ref`, whose
+     read/write split sits past a flag/refname prefix; each
+     gets its own token walk.
 
 The anchor `(?:^|[;&|(]+\s*)` keeps `echo 'git commit'` and similar
 quoted mentions from firing.
@@ -33,6 +40,9 @@ quoted mentions from firing.
   with the arguments they take, so a write cannot hide behind a
   value-consuming flag (`--default x --add key val` still blocks).
   Unknown flag shapes over-block reads rather than pass writes.
+- `symbolic-ref` shares that walk shape: read flags are skipped,
+  the first bare token is the refname (a read), a second bare
+  token or a delete flag is a write.
 - Stricter than a minimal reading: fetch/pull are blocked because
   they move remote-tracking refs, and refs belong to the user.
 
@@ -52,26 +62,34 @@ import sys
 # any mix of global options and their values before the verb.
 G = r'(?:^|[;&|(]+\s*)git(?:\s+(?:-{1,2}[\w-]+(?:=\S+)?)(?:\s+\S+)?)*\s+'
 
-# Verbs that always mutate repo state or refs. Verb names continue
-# through `-`, so a plain \b lets `merge` swallow `merge-base` (a
-# real FP): the lookahead excludes a following hyphen, and the
-# index-writing merge plumbing is listed in full to keep it blocked.
+# Verbs that always mutate repo state, refs, or object storage.
+# Verb names continue through `-`, so a plain \b lets `merge`
+# swallow `merge-base` (a real FP): the lookahead excludes a
+# following hyphen, and index-writing merge plumbing is listed in
+# full to keep it blocked.
 RW = (r'(add|am|apply|bisect|checkout|cherry-pick|clean|clone|commit|'
-      r'fetch|init|merge|merge-index|merge-one-file|mv|pull|push|'
-      r'rebase|reset|restore|revert|rm|switch|update-index)(?![-\w])')
+      r'fetch|filter-branch|filter-repo|gc|init|merge|merge-index|'
+      r'merge-one-file|mv|pack-refs|prune|pull|push|read-tree|rebase|'
+      r'repack|reset|restore|revert|rm|switch|update-index|'
+      r'update-ref)(?![-\w])')
 
 # Verbs whose read/write nature depends on the sub-command
-# (config is not here; its flags take a varying number of
-# arguments, so a fixed capture window cannot judge it).
+# (config and symbolic-ref are not here; their read/write split
+# sits past a flag/refname prefix, so each gets a token walk
+# like config's below).
 # The capture excludes shell separators: a plain \S+ would glue
 # a trailing `;` onto the token (`branch --list;` is a read).
-SUB = (r'(stash|branch|tag|remote|reflog|submodule|worktree)'
-       r'(?:\s+([^\s;&|()]+))?')
+SUB = (r'(stash|branch|tag|remote|reflog|submodule|worktree|notes|'
+       r'replace)(?:\s+([^\s;&|()]+))?')
 
 # `config` gets its own match carrying the whole argument tail:
 # some of its flags take an argument and some take none, so the
 # key/value boundary can only be found by walking the tokens.
 CFG = r'config\b([^;&|]*)'
+
+# `symbolic-ref` shares the shape: `[-q|--short] <name>` reads, a
+# second bare token (the new target) or a delete flag writes.
+SYM = r'symbolic-ref\b([^;&|]*)'
 
 # Read-only sub-commands per verb: branch/tag/remote/etc. with no
 # argument or with a listed flag stay allowed.
@@ -86,6 +104,8 @@ RO = {
                '--no-merged', '--points-at'},
     'tag': {None, '-l', '--list', '-n', '--contains', '--points-at',
             '--merged', '--sort', '--format'},
+    'notes': {None, 'list', 'show', 'get-ref'},
+    'replace': {None, '-l', '--list'},
 }
 
 # `config` read verbs: reaching one settles the call as a read.
@@ -135,14 +155,38 @@ def config_write(tail):
     return False                             # key alone (or nothing) -> read
 
 
+def symref_write(tail):
+    """True if a `git symbolic-ref` tail writes a symref.
+
+    `symbolic-ref [-q|--short] <name>` is a read; a second bare
+    token (the new target), a delete flag, or any unknown flag is
+    a write.
+    """
+    seen_name = False
+    for t in tail.split():
+        if t in {'-d', '--delete', '-m'}:
+            return True                  # delete, or -m (write-only flag)
+        if t in {'-q', '--quiet', '--short', '--recurse', '--no-recurse'}:
+            continue                     # read flags
+        if t.startswith('-'):
+            return True                  # unknown flag -> block
+        if seen_name:
+            return True                  # name plus target -> write
+        seen_name = True
+    return False
+
+
 def blocked(c):
     """True if the command contains a state-changing git invocation."""
-    sub = re.search(G + SUB, c)          # finds stash/branch/tag/remote/reflog/submodule/worktree
+    sub = re.search(G + SUB, c)          # finds stash/branch/tag/remote/reflog/submodule/worktree/notes/replace
     cfg = re.search(G + CFG, c)          # finds git config, carrying its arg tail
+    sym = re.search(G + SYM, c)          # finds git symbolic-ref, carrying its arg tail
     bad = bool(re.search(G + RW, c))     # finds commit/push/checkout/fetch/... (always mutating)
 
     if not bad and cfg:                  # no direct verb, but a config call: walk its args
         bad = config_write(cfg.group(1))
+    if not bad and sym:                  # a symbolic-ref call: same tail-walk treatment
+        bad = symref_write(sym.group(1))
     if not bad and sub:                  # still clean: judge the sub-verb against its read-only list
         bad = sub.group(2) not in RO[sub.group(1)]
     return bad

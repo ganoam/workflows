@@ -196,3 +196,12 @@ Owner solo work on `main`, merged into `private`.
   A generated variant (per-file heading tables via an `update-docs.sh` modeled on `~/workspaceconfig`'s) was tried and reverted in-session: the heading-derived tables read too noisy to be useful.
 - Upkeep wired as a standing duty, row added or adjusted in the same task that adds, renames, or retitles a tricks file: injected `AGENTS.md` duties, `rules.md` upkeep, `workflow.md` tricks section; root README's `tricks/` layout line names the index.
 - snippet: `MAINTAINING.md` minor upkeep.
+
+## 2026-11-24: git-state-guard: hyphenated-verb FP + coverage pass
+
+- Fixed a false positive: `RW`'s `\b` boundary let `merge` match the prefix inside `merge-base`, blocking read-only plumbing.
+  The list now ends in `(?![-\w])`, so no listed verb can swallow a longer hyphenated command; `merge-index` and `merge-one-file` are listed in full because they write the index and had only been blocked by the same accident.
+- Coverage pass against the `rules.md` contract: `RW` gained ref/index plumbing (`update-ref`, `read-tree`, `pack-refs`), storage rewrites (`gc`, `prune`, `repack`), and history rewrites (`filter-branch`, `filter-repo`); `SUB` gained `notes` and `replace`, which move refs on their write sub-commands; `symbolic-ref` got a `config`-style tail-walk since its read/write split sits past the flag/refname prefix.
+  `update-ref` was the real bypass: paired with `commit-tree` it forms a complete commit path around the guard.
+- Policy recorded as `pass` cases: object writes without ref/index moves stay allowed (`write-tree`, `commit-tree`, `merge-tree --write-tree`); `hash-object -w`/`mktag` stay uncovered until someone wants the flag-aware handling.
+- `hooks/tests/test-git-state-guard.py`: 72 -> 98 cases, the reported `merge-base && echo || echo` shape included.
