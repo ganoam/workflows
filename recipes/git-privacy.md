@@ -39,7 +39,8 @@ Doc text, links, and code comments count alike; a path that must appear in publi
 
 - Boundary is the `publish-base` tag (default: `origin/master`).
   Everything at or before it is settled and never re-examined; the tag auto-advances to the scanned `private` tip after every run.
-- Candidate commits: patches not yet on local `master` (`git cherry`), after the boundary, non-merge.
+- Candidate commits: patches not yet on local `master` (patch-id matched against all of `master`'s history, so copies merged back into `private` still count as published), after the boundary, non-merge.
+  Each commit's files are classified against the union of its era's `.gitprivate` and every later version on the range: a path private at commit time, or made private afterwards, never publishes.
 - Private-only commits are skipped.
   A commit mixing private and public files aborts the run: split it and re-run.
 - Picks are cherry-picked onto `master` in a temporary worktree, so the checkout never moves.
@@ -59,4 +60,4 @@ When a private file should become public from now on (its past stays private):
 
 ## Removing the boundary
 
-`git tag -d publish-base` resets the scan to `origin/master`: all private-side commits get reclassified under the current `.gitprivate` (useful for auditing, dangerous right after a graduation).
+`git tag -d publish-base` resets the scan to `origin/master`: all private-side commits get reclassified under their era-union `.gitprivate` (useful for auditing; pre-graduation commits are private at their era, so it no longer leaks a graduated file's past).
