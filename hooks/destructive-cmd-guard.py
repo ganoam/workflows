@@ -10,10 +10,10 @@ inline-diff approval. The hook blocks both classes mechanically:
 
   1. Deletion/destruction primitives (rm, shred, wipe, find
      -delete, dd of=, mkfs, truncate).
-  2. Commands that overwrite or in-place-modify an existing file
-     outside the approved edit path: `>`/echo redirections, `tee`,
-     `mv`/`cp`/`ln`/`rsync`/`install` onto an existing path, and
-     `sed -i`/`perl -i`.
+  2. Commands that overwrite, append to, or in-place-modify an
+     existing file outside the approved edit path: `>`/`>>`
+     redirections, `tee`, `mv`/`cp`/`ln`/`rsync`/`install` onto an
+     existing path, and `sed -i`/`perl -i`.
 
 Class 2 is what closes the loop a verb blocklist cannot: the same
 data dies via truncation and overwrite as via `rm`, and exec-side
@@ -25,12 +25,12 @@ Reads the hook event JSON on stdin, extracts `tool_input.command`,
 and resolves targets against the filesystem (`DEVIN_PROJECT_DIR`,
 following a leading `cd`). Effect-based checks:
 
-  - Any `>`/`>`/`<n>>`/`&>`/`>>|`-style redirection whose target
-    already exists; `>>` append passes (lookbehind on the second
-    `>`).
+  - Any `>`/`>>`/`<n>>`/`&>>`-style redirection (truncate or
+    append) whose target already exists; redirection onto a
+    not-yet-existing path is file creation and passes.
   - mv/cp/ln/rsync/install whose final non-flag token is an
     existing file.
-  - tee without -a onto an existing file.
+  - tee onto an existing file, with or without -a.
   - Primitive blocklist matched at command position so quoted
     mentions stay silent.
 
@@ -70,9 +70,10 @@ DEST = (r'(?:^|[;&|(]+\s*)(?:sudo\s+)?(rm|shred|wipe)\b'
         r'|\bmkfs\b|\btruncate\b'
         r'|\bsed\s+--?in-place\b|\bsed\s+-i\S*|\bperl\s+-[a-z]*i')
 
-# Truncating redirection targets: `<fd>>`, `>|`, `&>` etc. The
-# lookbehind `(?<!)` on `>` excludes the `>>` append form.
-REDIR = r'(?<!>)(?:\d|&)?>\|?(?!>)\s*(\S+)'
+# Redirection targets, truncate or append: `<fd>>`, `<fd>>>`, `>|`,
+# `&>`, `&>>` etc. Both count: appending to an existing file
+# modifies it outside the edit path just the same.
+REDIR = r'(?:\d|&)?>{1,2}\|?\s*(\S+)'
 
 # Commands whose last non-flag argument is the overwrite target.
 OVERWRITERS = r'\b(mv|cp|ln|rsync|install)\b([^;&|]*)'
@@ -99,7 +100,7 @@ def blocked(c):
             return True
     for args in re.findall(r'\btee\b([^;&|]*)', c):
         toks = [t for t in args.split() if not t.startswith('-')]
-        if '-a' not in args.split() and toks and exists(toks[-1]):
+        if toks and exists(toks[-1]):
             return True
     return False
 
@@ -115,7 +116,7 @@ def main():
     if blocked(c):
         print(json.dumps({
             'decision': 'block',
-            'reason': ('Blocked: the command destroys or overwrites '
+            'reason': ('Blocked: the command destroys or modifies '
                        'existing content outside the approved path '
                        '(agents/rules.md reserves deletion and '
                        'destructive ops for the user, and file edits '
