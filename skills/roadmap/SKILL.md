@@ -1,6 +1,6 @@
 ---
 name: roadmap
-description: Suggested structure for a repo's ROADMAP.md, distilled from the hw-commons and workflows roadmaps.
+description: Suggested structure for a repo's `ROADMAP.md`, distilled from the hw-commons and workflows roadmaps.
 generated: true
 ---
 

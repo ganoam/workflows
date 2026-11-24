@@ -1,6 +1,6 @@
 ---
 name: git-privacy
-description: Workflow for repos that are mostly public but carry private files that must never reach the public remote.
+description: Workflow for repos that are mostly public but carry private files (docs, notes, tooling state) that must never reach the public remote.
 generated: true
 ---
 
