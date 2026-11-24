@@ -100,8 +100,7 @@ Plugin hooks are best-effort and fail open: `agents/rules.md` remains the guaran
 
 ## Gotchas
 
-- Plugin install is per-machine (`devin plugins install`), not recorded in consumer repos.
+- Plugin install is per-machine (`devin plugins install --local <checkout>`), not recorded in consumer repos; the git-URL form is a snapshot and not recommended.
   Content canonicality lives with `~/workspaceconfig/deps/workflows`: the plugin ships discovery only, and repo-local `deps/workflows` checkouts are the fallback tier.
-- Git-installed plugins snapshot at install time; `--local` links the checkout live.
-  Use `--local` while iterating.
+- Git-installed plugins snapshot at install time; `--local` links the checkout live, which is the only recommended mode.
 - Git hooks (`deps/scripts` per consumer) are the real backstop for privacy rules: plugin `hooks.json` is documented fail-open; don't move the guardrail there yet.

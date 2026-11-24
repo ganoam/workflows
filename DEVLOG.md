@@ -211,3 +211,11 @@ Owner solo work on `main`, merged into `private`.
 - `workflow.md`'s deps section now states it: `deps/workflows/...` references in repo docs name the workflows checkout resolved through the chain (canonical first), while `deps/<tool>` references (`deps/scripts/...`) stay literal because they name the repo's pinned tooling version.
   Consumer `AGENTS.md` bodies written pre-pivot are correct by convention instead of needing path rewrites.
 - `template.md`'s recipes boilerplate back to the chain-neutral `deps/workflows/...` spelling: a literal `~/` path is wrong in any AGENTS.md read off-machine.
+
+## 2026-11-24: plugin install reframed as optional
+
+- `recipes/agent-setup.md`: the per-machine install section retitled "Optional, per machine: plugin install" and reworded: the workflow needs only `AGENTS.md` plus a checkout on the chain; the plugin adds skill discovery (`/workflows:*`) and `hooks.json` guards, both conveniences since `rules.md` binds regardless and hooks fail open.
+  The old text called the install required and claimed it "installs the rules", which was wrong; a consumer onboarding copied the framing into `hw-commons`' README.
+- README boilerplate in the same recipe now reads "Optional plugin install adds skill wrappers and lifecycle hooks"; `hw-commons/README.md` reworded to match; `skills/agent-setup` description synced.
+- Install mode pinned to `--local <workflows checkout>` after owner pushback: the git-URL form snapshots the repo at install time, so its wrappers, injected `AGENTS.md`, and hook code can collide with the canonical checkout as it moves on.
+  `--local` runs the checkout's own files and cannot drift; `MAINTAINING.md`'s install note updated the same way.

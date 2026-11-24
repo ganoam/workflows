@@ -46,7 +46,7 @@ Pivoted 2026-11-22 from the per-repo pin model described by the struck items: ea
 Apply `recipes/agent-setup.md` per repo; hw-commons is the pilot.
 
 - [x] `hw-commons`: `AGENTS.md` from template, project-local deltas preserved.
-- [ ] `hw-commons`: run `generate-skills` -> `.devin/skills/` for local recipes (untracked or private, owner's call); README getting-started line for plugin install.
+- [x] `hw-commons`: run `generate-skills` -> `.devin/skills/` for local recipes (untracked or private, owner's call); README getting-started line for plugin install.
 - [ ] Remaining consumer repos (list kept private): submodule + template `AGENTS.md` + hooks each.
 
 ## Hardening
@@ -55,7 +55,7 @@ Optional strengthening work; items land when they land.
 
 - [ ] `permissions.deny` on skills (block exec for doc procedures).
 - [x] Plugin `hooks.json` for git guards: documented fail-open today; `deps/scripts` hooks stay the real backstop; revisit when hardened.
-- [ ] Consumer README boilerplate line with the plugin install command.
+- [x] Consumer README boilerplate line with the plugin install command.
 - [x] Em-dash consistency: `rules.md` forbids em-dashes in generated text, but this repo's own docs and the `generate-skills` wrapper template still use them.
   Sweep docs and template, or declare generated wrappers exempt.
 - [x] Sentence-per-line sweep of this repo's prose docs (`agents/`, `recipes/`, `tricks/`, `README`/`DEVLOG`/`MAINTAINING`/`ROADMAP`) per the new `rules.md` style rule; timing is the owner's call.

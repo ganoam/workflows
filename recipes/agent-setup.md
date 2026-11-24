@@ -1,6 +1,6 @@
 # Uniform agent setup for a repo
 
-Set up the shared agent workflow in a repo: AGENTS.md, an optional fallback checkout, hooks, local skills, plus the one-time machine plugin install.
+Set up the shared agent workflow in a repo: AGENTS.md, an optional fallback checkout, git hooks, local skills; an optional plugin install adds skill wrappers and lifecycle hooks.
 The single source for this setup; other repos' docs point here.
 
 ## Architecture
@@ -16,14 +16,18 @@ The single source for this setup; other repos' docs point here.
   Each has a generated `skills/<name>/SKILL.md` wrapper so agents discover them mechanically; the wrapper defers to the recipe file.
 - A project may add its own `recipes/` directory; local overrides shared on overlap.
 
-## One-time, per machine
+## Optional, per machine: plugin install
+
+The workflow itself needs only `AGENTS.md` plus a workflows checkout on the chain: starting devin at the repo root resolves the binding docs.
+The plugin adds mechanics on top: skill discovery (slash commands appear as `/workflows:<skill>`) and the `hooks.json` lifecycle guards.
+Both are conveniences: `agents/rules.md` binds regardless, and the hooks are fail-open backstops (see `MAINTAINING.md`).
 
 ```
-devin plugins install ganoam/workflows
+devin plugins install --local <workflows checkout>
 ```
 
-(`devin plugins install --local <checkout>` while authoring, links the working copy.)
-This installs the rules and all generated skills; slash commands appear as `/workflows:<skill>`.
+Always install `--local`, pointed at your resolved workflows checkout (`~/workspaceconfig/deps/workflows`, or `deps/workflows` in a consumer repo): the plugin then runs the checkout's own files and cannot drift.
+The git-URL form (`devin plugins install ganoam/workflows`) is not recommended: it snapshots the repo at install time, and its wrappers, injected `AGENTS.md`, and hook code can disagree with the canonical checkout as it moves on.
 
 ## Per repo
 
@@ -33,7 +37,7 @@ This installs the rules and all generated skills; slash commands appear as `/wor
 
    ```markdown
    This repo uses the shared ganoam agent workflow; binding docs resolve from `~/workspaceconfig/deps/workflows`, falling back to `deps/workflows` in this repo.
-   Install the plugin once per machine for skills and hooks: `devin plugins install ganoam/workflows`.
+   Optional plugin install adds skill wrappers and lifecycle hooks: `devin plugins install --local deps/workflows` (recommended to avoid drift; upstream `devin plugins install ganoam/workflows` snapshots at install time, not recommended).
    ```
 
 4. If the repo uses the public/private workflow: `.gitprivate`, hooks via `deps/scripts/git-util/setup-git-hooks.sh` (see `git-privacy.md`).

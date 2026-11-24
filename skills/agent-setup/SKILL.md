@@ -1,6 +1,6 @@
 ---
 name: agent-setup
-description: "Set up the shared agent workflow in a repo: AGENTS.md, an optional fallback checkout, hooks, local skills, plus the one-time machine plugin install."
+description: "Set up the shared agent workflow in a repo: AGENTS.md, an optional fallback checkout, git hooks, local skills; an optional plugin install adds skill wrappers and lifecycle hooks."
 generated: true
 ---
 
