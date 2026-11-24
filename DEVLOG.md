@@ -217,5 +217,19 @@ Owner solo work on `main`, merged into `private`.
 - `recipes/agent-setup.md`: the per-machine install section retitled "Optional, per machine: plugin install" and reworded: the workflow needs only `AGENTS.md` plus a checkout on the chain; the plugin adds skill discovery (`/workflows:*`) and `hooks.json` guards, both conveniences since `rules.md` binds regardless and hooks fail open.
   The old text called the install required and claimed it "installs the rules", which was wrong; a consumer onboarding copied the framing into `hw-commons`' README.
 - README boilerplate in the same recipe now reads "Optional plugin install adds skill wrappers and lifecycle hooks"; `hw-commons/README.md` reworded to match; `skills/agent-setup` description synced.
-- Install mode pinned to `--local <workflows checkout>` after owner pushback: the git-URL form snapshots the repo at install time, so its wrappers, injected `AGENTS.md`, and hook code can collide with the canonical checkout as it moves on.
+- Install mode pinned to `--local` after owner pushback: the git-URL form snapshots the repo at install time, so its wrappers, injected `AGENTS.md`, and hook code can collide with the canonical checkout as it moves on.
   `--local` runs the checkout's own files and cannot drift; `MAINTAINING.md`'s install note updated the same way.
+
+## 2026-11-24: canonical README entry line + skills-sync session-start duty
+
+- New standing duty: a repo with `recipes/` keeps its generated `.devin/skills/` wrappers in sync; recorded in plugin `AGENTS.md`, `workflow.md` session lifecycle + doc layering, and `agent-setup.md` step 5 (no more manual re-run).
+- Mechanized as `hooks/skills-drift-check.py` on the SessionStart group: compares `recipes/*.md` to generated wrappers (missing, stale `description`, orphaned), injects a regenerate proposal only on drift, same verdict-only contract as `preamble-drift-check.py`.
+  `hooks/tests/test-skills-drift-check.py`: 10-case table, all pass; `MAINTAINING.md` hooks table updated.
+
+## 2026-11-24: recipes/README.md index + writer's guide
+
+- `recipes/README.md` added: the shared-recipe index (one row per file, tricks-style) plus the writer's contract: the intro's first sentence becomes the wrapper's `description`, shared recipes carry no provenance mark, local `recipes/<name>.md` shadows shared, `generate-skills` emits the wrapper and `README.md` itself gets none.
+- Upkeep is a session-start duty like `tricks/README.md`: recorded in plugin `AGENTS.md` and `workflow.md`; `skills-drift-check.py` now also compares index rows to recipe files (missing rows, dead rows) where the index exists.
+- The rework fixed two real gaps in the check: `README.md` is no longer scanned as a recipe, and the workflows repo itself resolves wrappers at `skills/` rather than `.devin/skills/` (it would have flagged every shared recipe otherwise).
+  `generate-skills` SKILL.md documents the `README.md` exclusion; `MAINTAINING.md` add/remove tasks and hooks table updated; test table now 17 cases, all pass.
+- First live run on this repo verified the design: it flagged a real bug (a `generated: true` line inside `generate-skills`' body example marked the file generated: frontmatter parsing now scopes to the leading `---` block) plus two genuinely stale wrappers; `git-privacy` and `roadmap` descriptions regenerated.
