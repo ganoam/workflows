@@ -5,8 +5,6 @@ allowed-tools:
   - read
   - grep
   - glob
-  - write
-  - edit
 ---
 
 Generate one thin skill wrapper per recipe so every procedure becomes agent-discoverable.
